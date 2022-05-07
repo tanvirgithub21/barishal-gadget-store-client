@@ -4,11 +4,17 @@
 .navLink ul li{
     display: inline;
     margin-right: 3.2rem;
+    color: #6f6f6f;
 }
 .menuBtn{
     display: none;
 }
 
+/* active link style  */
+.active{
+    color: black;
+    font-weight: 600;
+}
 
 
 
@@ -36,12 +42,11 @@
 }
 
 
-
-
-
-
 /* clicking hambarger menu active or deactive*/
 #openNavLink{
     top: 5rem;
+    transition: all 0.3s 0s ease;
+}
+#closeNavLink{
     transition: all 0.3s 0s ease;
 }
