@@ -17,9 +17,9 @@ const NavBar = () => {
                 <div className="navLink justify-between w-full md:flex z-10" id={open? "openNavLink" : "closeNavLink"}>
 
                     <ul>
+                        <li className=''><NavLink to="/home" className={({ isActive }) =>  isActive? "active" : "deActive"} >Home</NavLink></li>
                         <li className=''><NavLink to="/services" className={({ isActive }) =>  isActive? "active" : "deActive"} >Services</NavLink></li>
                         <li className=''><NavLink to="/items" className={({ isActive }) =>  isActive? "active" : "deActive"} >Items</NavLink></li>
-                        <li className=''><NavLink to="/home" className={({ isActive }) =>  isActive? "active" : "deActive"} >Link</NavLink></li>
                     </ul>
                     <ul>
                         <li className=''><NavLink to="/login" className={({ isActive }) =>  isActive? "active" : "deActive"} >Login</NavLink></li>

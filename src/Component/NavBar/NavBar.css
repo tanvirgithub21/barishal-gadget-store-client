@@ -17,7 +17,7 @@
 }
 
 
-
+/* responsive deign */
 @media only screen and (max-width: 768px){
     /* this class active to mobile version only  */
     .navLink{

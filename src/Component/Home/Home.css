@@ -1,0 +1,45 @@
+/* banner overlay and text style  */
+.bannerContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: rgb(224, 224, 224);
+    background-color: rgba(0, 0, 0, 0.638);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bannerWrap{
+    width: 50%;
+    height: auto;
+}
+.bannerHeader{
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 500;
+    letter-spacing: .2rem;
+    margin-bottom: 1rem;
+}
+.bannerText{
+    text-align: center;
+    font-size: 1.7rem;
+    margin: auto;
+
+}
+
+/* Responsive style banner font size */
+@media only screen and (max-width: 768px){
+    .bannerWrap{
+        width: 80%;
+    }
+	.bannerHeader{
+        margin-top: 1.5rem;
+        font-size: 2.1rem;
+    }
+    .bannerText{
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+    }
+}

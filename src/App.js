@@ -5,7 +5,7 @@ import NavBar from "./Component/NavBar/NavBar";
 
 function App() {
   return (
-    <div className="App bg-cyan-50">
+    <div className="App">
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
