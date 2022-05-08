@@ -20,7 +20,10 @@ h1,h2,h3,h4,h5,h6{
 body{
   font-family: 'Poppins', sans-serif;
 }
-li{
+ul{
   font-size: 1.6rem;
   font-weight: 500;
+}
+li{
+  cursor: pointer;
 }
