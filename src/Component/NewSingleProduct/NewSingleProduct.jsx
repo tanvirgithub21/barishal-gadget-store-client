@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillStarFill } from "react-icons/bs";
+import Rating from '../Rating/Rating';
 
 const NewSingleProduct = ({product}) => {
 
     const {rating, productName, price, image} = product;
     const [newProductName, setNewProductName] = useState("")
-
     useEffect(()=>{
         if(productName.length > 25){
             setNewProductName(productName.slice(0, 21) + "...")
@@ -23,7 +23,7 @@ const NewSingleProduct = ({product}) => {
             <div className="productInfo p-0 sm:p-2 my-0 md:my-3 text-center text-[1rem] sm:text-[1rem] md:text-2xl font-[500] text-[#000015c8]">
                 <h4 className='cursor-pointer' title={productName}>{newProductName}</h4>
                 <div className="priceAndRating text-xs sm:text-[1rem] md:text-[1.4rem] ">
-                    <div className="rating flex justify-center my-1 md:my-3 text-[#f9cb00]"><BsFillStarFill className='mr-1'/><BsFillStarFill className='mr-1'/><BsFillStarFill className='mr-1'/><BsFillStarFill className='mr-1'/><BsFillStarFill className='mr-1'/></div>
+                    <div className="rating flex justify-center my-1 md:my-3 text-[#f9cb00]"><Rating rating={rating}/></div>
                     <p className='font-semibold text-[1rem] mb-2 sm:my-2 md:my-3'><span>$</span> {price}</p>
                 </div>
             </div>

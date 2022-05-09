@@ -8,7 +8,6 @@ const TrendingSinglePd = ({product}) => {
     
     const {rating, productName, price, image} = product;
     const [newProductName, setNewProductName] = useState("")
-    
 
     useEffect(()=>{
         if(productName?.length > 25){
@@ -23,7 +22,7 @@ const TrendingSinglePd = ({product}) => {
         <div className="imgBox rounded-xl overflow-hidden mb-5">
             <img src={image} alt="Images" />
         </div>
-        <div className="trendingPdInfo text-sm sm:text-xl md:text-2xl font-[500] text-center">
+        <div className="trendingPdInfo text-[1rem] sm:text-xl md:text-2xl font-[500] text-center">
             <h3 title={productName} className='cursor-pointer'>{newProductName}</h3>
             <div className='flex justify-center items-center my-2 text-[#f1c100]'><BsFillStarFill/><BsFillStarFill/><BsFillStarFill/><BsFillStarFill/><BsFillStarFill/></div>
             <p>$ <span>{price}</span></p>
