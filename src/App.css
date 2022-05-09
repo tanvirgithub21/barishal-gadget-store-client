@@ -27,3 +27,52 @@ ul{
 li{
   cursor: pointer;
 }
+.sectionContainer{
+  max-width: 1024px;
+  margin: auto;
+  padding: 0 1.2rem 0 1.2rem;
+}
+.SectionHeader{
+  position: relative;
+  font-size: 3rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 2rem 0 2rem 0;
+}
+.SectionHeader::after{
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  content: "";
+  width: 27%;
+  height: 100%;
+  border-bottom: .3rem solid blue;
+  transform: translateX(-50%);
+}
+
+/* Responsive style section header */
+@media only screen and (max-width: 768px){
+  .SectionHeader{
+    font-size: 2rem;
+    padding: 2rem 0 2rem 0;
+  }
+  .SectionHeader::after{
+    top: -25%;
+    width: 35%;
+    height: 100%;
+  }
+  
+}
+@media only screen and (max-width: 640px){
+        /* section header style  */
+        .SectionHeader{
+          font-size: 1.4rem;
+          padding: 2rem 0 2rem 0;
+        }
+        .SectionHeader::after{
+          top: -25%;
+          width: 28%;
+          height: 100%;
+          border-bottom: .2rem solid blue;
+        }
+}

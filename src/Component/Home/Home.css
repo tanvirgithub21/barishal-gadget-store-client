@@ -29,6 +29,12 @@
 
 }
 
+.singleProductContainer{
+    overflow: hidden;
+    grid-template-columns: repeat(4, 200px);
+    justify-content: space-evenly;
+}
+
 /* Responsive style banner font size */
 @media only screen and (max-width: 768px){
     .bannerWrap{
@@ -42,4 +48,15 @@
         font-size: 1.3rem;
         margin-bottom: 2rem;
     }
+
+    /* latest product style  */
+    .singleProductContainer{
+        grid-template-columns: repeat(4, 130px);
+    }
+}
+@media only screen and (max-width: 640px){
+        /* latest product style  */
+        .singleProductContainer{
+            grid-template-columns: repeat(4, 70px);
+        }
 }
