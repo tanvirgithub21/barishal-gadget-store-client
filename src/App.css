@@ -50,6 +50,24 @@ li{
   transform: translateX(-50%);
 }
 
+/* add to card button  */
+.addCardBtn{
+  background-color: #1e8bff;
+  color: #FFF;
+  font-weight: 500;
+  padding: .5rem .9rem;
+  border-radius: 1.5rem;
+  transition: ease-in-out .3s;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+/* add to card button hover */
+.addCardBtn:hover{
+  background-color: #0061c9;
+  color: rgb(240, 240, 240);
+}
+
 /* Responsive style section header */
 @media only screen and (max-width: 768px){
   .SectionHeader{

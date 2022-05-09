@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NewSingleProduct from '../NewSingleProduct/NewSingleProduct';
-
+import TrendingSinglePd from '../TrendingSinglePd/TrendingSinglePd';
 import "./Home.css"
 
 const Home = () => {
@@ -10,6 +10,7 @@ const Home = () => {
 
 
     const [latestProducts, setLatestProduct] = useState([]);
+    const [trendingProducts, setTrendingProduct] = useState([]);
 
     useEffect(()=>{
         fetch("https://raw.githubusercontent.com/tanvirgithub21/assainment-11-data/main/latast-product.json")
@@ -17,9 +18,18 @@ const Home = () => {
         .then(data => setLatestProduct(data))
     },[])
 
+    useEffect(()=>{
+        fetch("https://raw.githubusercontent.com/tanvirgithub21/assainment-11-data/main/trendingPd.json")
+        .then(res => res.json())
+        .then(data => setTrendingProduct(data))
+    },[])
+
+
 
     return (
         <div>
+
+            {/* home banner section */}
             <section className="homeBanner relative w-full h-[45vh] md:h-[70vh] overflow-hidden bg-amber-600">
 
                 {/* Perfect Image size 480 height and 1300 width */}
@@ -34,6 +44,8 @@ const Home = () => {
 
             </section>
 
+
+            {/* latest Product section */}
             <section className='latestProducts'>
                 <div className="sectionContainer">
                     
@@ -50,6 +62,23 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* Trending Product section */}
+            <section>
+                <div className="sectionContainer">
+
+                    <h3 className="SectionHeader">Trending Product</h3>
+
+                    <div className="trendingPdBox grid grid-cols-3 gap-6 my-12">
+                        {
+                            trendingProducts.map(pd =>(
+                                <TrendingSinglePd key={pd._id} product={pd} />
+                            ))
+                        }
+                    </div>
+                    
+
+                </div>
+            </section>
 
 
         </div>
