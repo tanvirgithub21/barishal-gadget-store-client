@@ -7,9 +7,14 @@ const AddItem = () => {
     const [thisMonth, setThisMonth] = useState(new Date().toISOString().slice(5, 7));//this month
     const [thisDate, setThisDate] = useState(new Date().toISOString().slice(8, 10));//this date
 
+    const handelBackButton = () =>{
+      window.history.back();  
+  }
+
   return (
     <section>
       <div className="sectionContainer">
+
         <form className="bg-[#1f2937] p-10 my-12 rounded-2xl">
 
             <div className="title flex justify-center text-4xl text-gray-300 mb-12">

@@ -26,7 +26,7 @@ useEffect(() =>{
       <div className="sectionContainer">
         <h2 className="SectionHeader">Inventory Items</h2>
 
-        <div className="inventoryItemBox grid grid-cols-2 gap-8 my-10">
+        <div className="inventoryItemBox grid grid-cols-1 sm:grid-cols-2 gap-8 mx-6 sm:mx-0 my-10">
             {
                 inventoryItem.map(item => <InventorySingleItem key={item._id} item={item}/>)
             }

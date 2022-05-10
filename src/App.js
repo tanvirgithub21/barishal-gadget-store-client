@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import AddItem from "./Component/AddItem/AddItem";
-import AllInventoryItem from "./Component/AllInventoryItem/AllInventoryItem";
 import Footer from "./Component/Footer/Footer";
+import ForgotPassword from "./Component/ForgotPassword/ForgotPassword";
 import Home from "./Component/Home/Home";
 import Inventory from "./Component/Inventory/Inventory";
+import Login from "./Component/Login/Login";
 import NavBar from "./Component/NavBar/NavBar";
 import UpdateItem from "./Component/TrendingSinglePd/UpdateItem/UpdateItem";
 
@@ -17,8 +18,9 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/items" element={<Inventory />} />
         <Route path="/services" element={<UpdateItem />} />
-        <Route path="/login" element={<AllInventoryItem />} />
-        <Route path="/singin" element={<AddItem />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/login/forgot" element={<ForgotPassword />} />
+        <Route path="/singIn" element={<AddItem />} />
       </Routes>
       <Footer />
     </div>
