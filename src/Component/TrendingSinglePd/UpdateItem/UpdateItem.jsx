@@ -20,7 +20,7 @@ const UpdateItem = () => {
     }
 
     return (
-          <>
+          <div className='overflow-hidden'>
             <div className="SectionHeader">Update Item</div>
 
             <div className="inventoryItemBox max-w-[65rem] mx-6 sm:mx-auto py-7 sm:py-16 md:py-[10rem]">
@@ -61,7 +61,7 @@ const UpdateItem = () => {
             <div className="flex justify-center mb-10">
               <Link to="" className='text-center text-white text-2xl font-[500] px-6 py-3 rounded-md bg-[#3369ff] hover:bg-[#1e5aff] transition duration-150 ease-in-out'>Manage All Inventory</Link>
             </div>
-          </>
+          </div>
     );
 };
 
