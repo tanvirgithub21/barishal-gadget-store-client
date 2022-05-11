@@ -1,15 +1,33 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+
+//email and pass regex
+const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [validEmail, setValidEmail] = useState("");
+  const [validPassword, setValidPassword] = useState("");
 
-  const handelWithEmail = (event) => {
-    event.preventDefault();
-    event.target.reset();
-    console.log(email, password);
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = ({ email, password }) => {
+    //email valid function
+    if (email.match(regexEmail)) {
+      setValidEmail(email);
+    } else {
+      return toast.error("Please Input Valid Email");
+    }
+
+    //password valid function
+    if (password.match(regexPassword)) {
+      setValidPassword(password);
+    } else {
+      return toast.error("Minimum eight characters, One letter & one number");
+    }
   };
 
   return (
@@ -19,14 +37,17 @@ const Login = () => {
           <h3 className="text-2xl md:text-4xl mt-24 sm:mt-8 font-bold text-center">
             Login to your account
           </h3>
-          <form onSubmit={handelWithEmail} className="text-xl sm:text-2xl">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="text-xl sm:text-2xl"
+          >
             <div className="mt-4">
               <div>
                 <label className="block font-semibold" htmlFor="email">
                   Email
                 </label>
                 <input
-                  onChange={(event) => setEmail(event.currentTarget.value)}
+                  {...register("email")}
                   type="text"
                   placeholder="Email"
                   name="email"
@@ -37,7 +58,7 @@ const Login = () => {
               <div className="mt-4">
                 <label className="block font-semibold">Password</label>
                 <input
-                  onChange={(event) => setPassword(event.currentTarget.value)}
+                  {...register("password")}
                   type="password"
                   placeholder="Password"
                   name="password"
