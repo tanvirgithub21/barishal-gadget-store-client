@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 const imageUrl =
   "https://raw.githubusercontent.com/tanvirgithub21/assainment-11-data/main/rsz_60111.jpg";
 
+//email regex
+const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
 const ForgotPassword = () => {
 
-    const [email, setEmail] = useState("")
+  const {register, handleSubmit,} = useForm()
 
-    const handelResetPassword = event => {
-        event.preventDefault()
-        console.log(email)
-        event.target.reset()
+  const [validEmail, setValidEmail] = useState("")
+
+  const onSubmit = ({email}) =>{
+    if(email.match(regexEmail)){
+      setValidEmail(email)
+    }else{
+      return toast.error("Please Input Valid Email")
     }
+  }
 
 
   return (
@@ -45,11 +54,11 @@ const ForgotPassword = () => {
               </p>
             </div>
 
-            <form onSubmit={handelResetPassword} className="text-2xl">
+            <form onSubmit={handleSubmit(onSubmit)} className="text-2xl">
               <div className="mt-4">
                 <div>
                   <input
-                    onChange={event => setEmail(event.currentTarget.value)}
+                    {...register("email")}
                     type="text"
                     placeholder="Enter Email Address"
                     name="email"
