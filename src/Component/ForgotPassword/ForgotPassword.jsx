@@ -5,10 +5,6 @@ const imageUrl =
   "https://raw.githubusercontent.com/tanvirgithub21/assainment-11-data/main/rsz_60111.jpg";
 
 const ForgotPassword = () => {
-    // back button function 
-    const handelBackButton = () =>{
-        window.history.back();  
-    }
 
     const [email, setEmail] = useState("")
 
@@ -24,7 +20,7 @@ const ForgotPassword = () => {
       <div className="sectionContainer relative">
 
         <div className="backBtn flex justify-start text-slate-100 sm:absolute sm:top-6 sm:left-5 mt-4 ml-4 sm:mt-0 sm:ml-0">
-            <button onClick={handelBackButton} className="flex items-center text-xl font-semibold bg-sky-600 pr-5 rounded-lg cursor-pointer py-2"><MdKeyboardArrowLeft className="text-4xl"/> BACK</button>
+            <button onClick={() => window.history.back()} className="flex items-center text-xl font-semibold bg-sky-600 pr-5 rounded-lg cursor-pointer py-2"><MdKeyboardArrowLeft className="text-4xl"/> BACK</button>
         </div>
 
         <div className="flex sm:items-center justify-center sm:min-h-screen mb-20 sm:mb-0">
@@ -63,11 +59,11 @@ const ForgotPassword = () => {
                 </div>
 
                 <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700 w-full font-[500]">
-                  Login
+                  Reset Password
                 </button>
 
                 <Link
-                  to="login/singIn"
+                  to="/singIn"
                   className="text-center block mt-5 text-2xl font-[500] text-blue-600 hover:underline"
                 >
                   Create new account

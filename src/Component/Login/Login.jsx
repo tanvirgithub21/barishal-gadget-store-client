@@ -56,7 +56,7 @@ const Login = () => {
                   Forgot password?
                 </Link>
                 <Link
-                  to="login/singIn"
+                  to="/singIn"
                   className="text-xl font-[500] text-blue-600 hover:underline"
                 >
                   Create new account

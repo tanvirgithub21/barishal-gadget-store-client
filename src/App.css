@@ -78,6 +78,10 @@ li{
   margin-right: .6rem;
 }
 
+.tostContainer{
+  font-size: 1.6rem;
+}
+
 /* Responsive style section header */
 @media only screen and (max-width: 768px){
   .SectionHeader{
