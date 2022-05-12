@@ -3,25 +3,26 @@ import { Link } from "react-router-dom";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from "../../firebase.init";
+
 
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const SingIn = () => {
-  const { register, handleSubmit, reset, formState } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
-
-  //singIn form valid email and password state
-  const [validEmail, setValidEmail] = useState("");
-  const [valiPassword, setValidPassword] = useState("");
-
+  const [ createUserWithEmailAndPassword, user, loading, createUserError, ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
+  
   // submit form function
   const onSubmit = (data) => {
+
     const { email, password, confirmPassword } = data;
 
     //check valid email or not
     if (email.match(regexEmail)) {
-      setValidEmail(email);
+      //no work hear
     } else {
       return toast.error("Please Input Valid Email")
     }
@@ -29,13 +30,21 @@ const SingIn = () => {
     //check valid pass and confirm Pass
     if (password === confirmPassword) {
       if (confirmPassword.match(regexPassword)) {
-        setValidPassword(confirmPassword);
+        console.log(email, confirmPassword);
+
+        //create user with email and password
+        createUserWithEmailAndPassword(email, confirmPassword)
+        createUserError ? toast.error(`${createUserError?.message.slice(22, -2)?.toUpperCase()}`) : toast.success("Send Email Verification")
+        reset()//reset form value
+        
       } else {
         return toast.error("Minimum eight characters, One letter & one number")
       }
     } else {
         return toast.error("Password Not Match")
     }
+
+
   };
 
   return (
