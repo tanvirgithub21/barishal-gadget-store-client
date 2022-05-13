@@ -1,8 +1,9 @@
 import React from "react";
 import TabileData from "../TabileData/TabileData";
 import { FiPlusSquare } from "react-icons/fi";
+import { Link, Navigate } from "react-router-dom";
 
-const AllInventoryItem = () => {
+const ManageItem = () => {
 
 
   return (
@@ -10,7 +11,7 @@ const AllInventoryItem = () => {
         <div className="sectionContainer min-h-[calc(100vh-31rem)]">
 
         <div className="flex justify-end mt-10" >
-            <button className="px-8 py-4 bg-[#3369ff] rounded-md text-white text-2xl font-[500] flex items-center">Add New <FiPlusSquare className="ml-2"/> </button>
+            <Link to="/addItem"  className="px-8 py-4 bg-[#3369ff] rounded-md text-white text-2xl font-[500] flex items-center">Add New <FiPlusSquare className="ml-2"/> </Link>
         </div>
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-9">
@@ -53,4 +54,4 @@ const AllInventoryItem = () => {
   );
 };
 
-export default AllInventoryItem;
+export default ManageItem;

@@ -31,11 +31,6 @@ useEffect(() =>{
                 inventoryItem.map(item => <InventorySingleItem key={item._id} item={item}/>)
             }
 
-            <div className="addItem flex justify-center items-center bg-white rounded-lg border shadow-md border-gray-700 cursor-pointer">
-                <div className="addIcon w-52 h-52 overflow-hidden text-[20rem] text-[#80808064] flex justify-center items-center">
-                    <AiOutlinePlusSquare/>
-                </div>
-            </div>
         </div>
       </div>
     </section>

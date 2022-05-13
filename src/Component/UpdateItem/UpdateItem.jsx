@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const UpdateItem = () => {
+
+  const {_id} = useParams()
 
     const [updateItem, setUpdateItem] = useState({})
 
@@ -58,7 +60,7 @@ const UpdateItem = () => {
             </div>
 
             <div className="flex justify-center mb-10">
-              <Link to="" className='text-center text-white text-2xl font-[500] px-6 py-3 rounded-md bg-[#3369ff] hover:bg-[#1e5aff] transition duration-150 ease-in-out'>Manage All Inventory</Link>
+              <Link to="/manageItem" className='text-center text-white text-2xl font-[500] px-6 py-3 rounded-md bg-[#3369ff] hover:bg-[#1e5aff] transition duration-150 ease-in-out'>Manage All Inventory</Link>
             </div>
           </div>
     );

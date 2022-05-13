@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from "../../firebase.init";
 
 
@@ -11,6 +11,12 @@ const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const SingIn = () => {
+
+  const location = useLocation()
+  const navigate = useNavigate()
+  const logInUser = useAuthState(auth)
+  let from = location.state?.from?.pathname || "/";
+
   const { register, handleSubmit, reset } = useForm();
 
   const [ createUserWithEmailAndPassword, user, loading, createUserError, ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
@@ -41,6 +47,10 @@ const SingIn = () => {
       }
     } else {
         return toast.error("Password Not Match")
+    }
+
+    if(logInUser){
+      navigate(from, {replace:true})
     }
 
 

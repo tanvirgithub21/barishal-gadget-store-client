@@ -23,8 +23,6 @@ const NavBar = () => {
       });
   };
 
-  console.log(loginUser?.email);
-
   return (
     <nav className="navBar bg-[#ebebeb] shadow-lg">
       <div className="max-w-[1024px] h-[5rem] mx-auto flex justify-between items-center px-[.6rem]">
@@ -49,10 +47,10 @@ const NavBar = () => {
             </li>
             <li className="">
               <NavLink
-                to="/services"
+                to="/inventory"
                 className={({ isActive }) => (isActive ? "active" : "deActive")}
               >
-                All Item
+                Inventory
               </NavLink>
             </li>
           </ul>

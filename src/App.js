@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import ManageItem from "./Component/ManageItem/ManageItem";
 import Footer from "./Component/Footer/Footer";
 import ForgotPassword from "./Component/ForgotPassword/ForgotPassword";
 import Home from "./Component/Home/Home";
@@ -10,7 +11,8 @@ import Login from "./Component/Login/Login";
 import NavBar from "./Component/NavBar/NavBar";
 import NotFound from "./Component/NotFound/NotFound";
 import SingIn from "./Component/SingIn/SingIn";
-import UpdateItem from "./Component/TrendingSinglePd/UpdateItem/UpdateItem";
+import UpdateItem from "./Component/UpdateItem/UpdateItem";
+import AddItem from "./Component/AddItem/AddItem";
 
 function App() {
   return (
@@ -19,8 +21,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/items" element={<Inventory />} />
-        <Route path="/services" element={<UpdateItem />} />
+        <Route path="/inventory" element={<Inventory />} />
+        <Route path="/inventory/:_id" element={<UpdateItem />} />
+        <Route path="/item" element={<Inventory />} />
+        <Route path="/addItem" element={<AddItem />} />
+        <Route path="/manageItem" element={<ManageItem />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login/forgot" element={<ForgotPassword />} />
         <Route path="/singIn" element={<SingIn />} />

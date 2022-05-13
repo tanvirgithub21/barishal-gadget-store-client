@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const InventorySingleItem = ({item}) => {
 
@@ -14,7 +15,7 @@ const InventorySingleItem = ({item}) => {
 
 
     return (
-        <div key={item?._id} className="inventoryItemBox">
+        <div className="inventoryItemBox">
             <div className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row max-w-auto border-gray-700 bg-gray-800 overflow-hidden ">
               <img
                 className="object-cover w-full h-full rounded-t-lg md:h-auto md:w-[21rem] md:rounded-none md:rounded-l-lg "
@@ -31,7 +32,7 @@ const InventorySingleItem = ({item}) => {
                   <p>$ {item?.price}</p>
                 </div>
 
-                  <button className="bg-[#3369ff] py-1 rounded-md hover:bg-[#1e5aff] transition duration-150 ease-in-out">Update</button>
+                  <Link to={`/inventory/${item?._id}`} className="bg-[#3369ff] py-1 rounded-md hover:bg-[#1e5aff] text-center transition duration-150 ease-in-out">Update</Link>
 
               </div>
             </div>

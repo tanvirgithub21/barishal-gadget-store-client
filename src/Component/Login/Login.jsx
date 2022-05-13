@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -13,6 +13,10 @@ const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const Login = () => {
   
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [logInUser] = useAuthState(auth)
+  let from = location.state?.from?.pathname || "/";
 
   const [ signInWithEmailAndPassword, user, signInLoading, signInError, ] = useSignInWithEmailAndPassword(auth);
 
@@ -43,12 +47,17 @@ const Login = () => {
   const handleSingInGoogle = () =>{
     signInWithGoogle();
   }
-
-  const [newUser] = useAuthState(auth)
   
   useEffect(() => {
     toast.error(signInError?.message.slice(22, -2).toUpperCase())
   }, [signInError])
+
+
+  console.log(logInUser);
+
+  if(logInUser){
+    navigate(from, {replace: true})
+  }
 
 
   return (
