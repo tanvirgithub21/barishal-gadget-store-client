@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const InventorySingleItem = ({item}) => {
 
@@ -11,7 +13,10 @@ const InventorySingleItem = ({item}) => {
     }else{
       setNewDescription(item.description)
     }
-  }, [])
+  }, [item])
+
+
+
 
 
     return (

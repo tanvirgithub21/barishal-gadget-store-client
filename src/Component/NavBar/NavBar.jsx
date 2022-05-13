@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import { BsJustifyRight, BsXSquare } from "react-icons/bs";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,6 +12,7 @@ const NavBar = () => {
 
   const [open, setOpen] = useState(false);
 
+  const navigate = useNavigate()
   const handelSingOut = () => {
     const auth = getAuth();
     signOut(auth)
@@ -21,6 +22,7 @@ const NavBar = () => {
       .catch((error) => {
         error && toast.error("Logout Failed");
       });
+      navigate("/home")
   };
 
   return (
@@ -90,7 +92,7 @@ const NavBar = () => {
               <li className="">
                 <button
                   onClick={handelSingOut}
-                  className="px-4 py-2 text-2xl text-white font-[500] rounded-xl bg-[#e63636]"
+                  className="px-4 py-2 text-2xl text-white font-[500] rounded-xl bg-[#e63636] hover:bg-[#fe2828] ease-in-out duration-300"
                 >
                   LOGOUT
                 </button>

@@ -13,6 +13,8 @@ import NotFound from "./Component/NotFound/NotFound";
 import SingIn from "./Component/SingIn/SingIn";
 import UpdateItem from "./Component/UpdateItem/UpdateItem";
 import AddItem from "./Component/AddItem/AddItem";
+import RequireAuth from "./Component/RequireAuth/RequireAuth";
+import MyItem from "./Component/MyItem/MyItem";
 
 function App() {
   return (
@@ -22,10 +24,18 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/inventory" element={<Inventory />} />
-        <Route path="/inventory/:_id" element={<UpdateItem />} />
+        <Route
+          path="/inventory/:_id"
+          element={
+            <RequireAuth>
+              <UpdateItem />
+            </RequireAuth>
+          }
+        />
         <Route path="/item" element={<Inventory />} />
         <Route path="/addItem" element={<AddItem />} />
         <Route path="/manageItem" element={<ManageItem />} />
+        <Route path="/myItem" element={<MyItem />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login/forgot" element={<ForgotPassword />} />
         <Route path="/singIn" element={<SingIn />} />

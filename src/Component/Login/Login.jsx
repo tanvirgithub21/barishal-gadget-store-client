@@ -16,7 +16,8 @@ const Login = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const [logInUser] = useAuthState(auth)
-  let from = location.state?.from?.pathname || "/";
+  let form = location.state?.form?.pathname || "/";
+
 
   const [ signInWithEmailAndPassword, user, signInLoading, signInError, ] = useSignInWithEmailAndPassword(auth);
 
@@ -53,12 +54,12 @@ const Login = () => {
   }, [signInError])
 
 
-  console.log(logInUser);
+
+
 
   if(logInUser){
-    navigate(from, {replace: true})
+    navigate(form, {replace: true})
   }
-
 
   return (
     <div>
