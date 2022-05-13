@@ -1,34 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import auth from "../../firebase.init";
+import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+
 
 //email and pass regex
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const Login = () => {
-  const [validEmail, setValidEmail] = useState("");
-  const [validPassword, setValidPassword] = useState("");
+  
 
-  const { register, handleSubmit } = useForm();
+  const [ signInWithEmailAndPassword, user, signInLoading, signInError, ] = useSignInWithEmailAndPassword(auth);
 
+  const { register, handleSubmit, reset } = useForm();
+  
   const onSubmit = ({ email, password }) => {
     //email valid function
     if (email.match(regexEmail)) {
-      setValidEmail(email);
+      //no work hear
     } else {
       return toast.error("Please Input Valid Email");
     }
 
     //password valid function
     if (password.match(regexPassword)) {
-      setValidPassword(password);
+      //no work hear
     } else {
       return toast.error("Minimum eight characters, One letter & one number");
     }
+
+    //login With Email and Password
+    signInWithEmailAndPassword(email, password)
+    reset()
   };
+  
+  //Sing In With Google Account
+  const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] = useSignInWithGoogle(auth);
+  const handleSingInGoogle = () =>{
+    signInWithGoogle();
+  }
+
+  const [newUser] = useAuthState(auth)
+  
+  useEffect(() => {
+    toast.error(signInError?.message.slice(22, -2).toUpperCase())
+  }, [signInError])
+
 
   return (
     <div>
@@ -88,7 +109,7 @@ const Login = () => {
               </p>
 
               <div className="singInGoogleBtn flex justify-center items-center my-5  mb-24 sm:mb-0 ">
-                <div className="bg-slate-200 hover:bg-slate-300 ease-in-out duration-300 px-5 py-3 rounded-md flex justify-center items-center font-[500] text-slate-600 cursor-pointer">
+                <div onClick={handleSingInGoogle} className="bg-slate-200 hover:bg-slate-300 ease-in-out duration-300 px-5 py-3 rounded-md flex justify-center items-center font-[500] text-slate-600 cursor-pointer">
                   <FcGoogle className="mr-1 text-[2.5rem]" />
                   <p> SingIn with Google</p>
                 </div>

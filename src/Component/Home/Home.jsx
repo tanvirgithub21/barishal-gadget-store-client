@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Loading from "../NavBar/Loading/Loading";
+import Loading from "../Loading/Loading";
 import NewSingleProduct from "../NewSingleProduct/NewSingleProduct";
 import TrendingSinglePd from "../TrendingSinglePd/TrendingSinglePd";
 import "./Home.css";

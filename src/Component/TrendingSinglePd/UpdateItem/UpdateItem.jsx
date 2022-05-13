@@ -12,7 +12,6 @@ const UpdateItem = () => {
         .then(data => setUpdateItem(data[0]))
     },[])
 
-    console.log(updateItem);
     const addQuantity = event =>{
       event.preventDefault()
       console.log(event.target.quantity.value);

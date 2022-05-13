@@ -30,7 +30,6 @@ const SingIn = () => {
     //check valid pass and confirm Pass
     if (password === confirmPassword) {
       if (confirmPassword.match(regexPassword)) {
-        console.log(email, confirmPassword);
 
         //create user with email and password
         createUserWithEmailAndPassword(email, confirmPassword)
