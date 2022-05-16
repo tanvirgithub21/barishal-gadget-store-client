@@ -7,20 +7,41 @@ const UpdateItem = () => {
 
   const {_id} = useParams()
 
+  console.log(_id);
+
     const [updateItem, setUpdateItem] = useState({})
 
 
     useEffect(() =>{
-        fetch("https://raw.githubusercontent.com/tanvirgithub21/assainment-11-data/main/inventory.json")
+        fetch(`http://localhost:5000/item/${_id}`)
         .then(res => res.json())
-        .then(data => setUpdateItem(data[0]))
+        .then(data => setUpdateItem(data))
     },[])
+
+    console.log(updateItem, "update Item");
 
     const addQuantity = event =>{
       event.preventDefault()
       console.log(event.target.quantity.value);
       event.target.reset()
     }
+
+    const [newDescription, setNewDescription] = useState("")
+    const [newPdName, setPdName] = useState("")
+  
+    useEffect(() =>{
+      if(updateItem?.description?.length > 100){
+        setNewDescription(updateItem?.description.slice(0, 98) + "...")
+      }else{
+        setNewDescription(updateItem?.description)
+      }
+  
+      if(updateItem?.productName?.length > 32){
+        setPdName(updateItem?.productName.slice(0, 20) + "...")
+      }else{
+        setPdName(updateItem?.productName)
+      }
+    }, [updateItem])
 
     return (
           <div className='overflow-hidden'>
@@ -30,13 +51,13 @@ const UpdateItem = () => {
               <div className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row max-w-auto border-gray-700 bg-gray-800 overflow-hidden ">
                 <img
                   className="object-cover w-full h-full rounded-t-lg md:h-auto md:w-[21rem] md:rounded-none md:rounded-l-lg "
-                  src={updateItem?.image}
+                  src={updateItem?.imgUrl}
                   alt="Inventory Item"
                 />
-                <div className="flex flex-col justify-between p-4 leading-normal text-white font-normal text-xl">
+                <div className="w-full flex flex-col justify-between p-4 leading-normal text-white font-normal text-xl">
                   <h5 className='mb-2 text-2xl font-[500] tracking-tight'>Product ID : {updateItem?._id}</h5>
-                  <h3 className="mb-2 text-2xl font-[500] tracking-tight ">{updateItem?.name}</h3>
-                  <p className="mb-3 text-gray-700 dark:text-gray-400">{updateItem?.description}</p>
+                  <h3 className="mb-2 text-2xl font-[500] tracking-tight ">{newPdName}</h3>
+                  <p className="mb-3 text-gray-700 dark:text-gray-400">{newDescription}</p>
                   <p className="mb-4">Supplier: Daraz BD</p>
 
                   <div className="flex justify-between items-center mb-3 text-xl font-[500] text-center">
@@ -44,7 +65,7 @@ const UpdateItem = () => {
                     <p>$ {updateItem?.price}</p>
                   </div>
 
-                    <div className='flex justify-between'>
+                    <div className='w-full flex justify-between'>
 
                       <button className="bg-[#3369ff] py-1 rounded-md hover:bg-[#1e5aff] transition duration-150 ease-in-out px-5 py-2 font-[500] w-[47%]">Deliver</button>
 

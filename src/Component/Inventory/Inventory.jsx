@@ -8,7 +8,7 @@ const Inventory = () => {
 const [inventoryItem, setInventoryItem] = useState([])
 const [newDescription, setNewDescription] = useState([])
 useEffect(() =>{
-    fetch("https://raw.githubusercontent.com/tanvirgithub21/assainment-11-data/main/inventory.json")
+    fetch("http://localhost:5000/allItems")
     .then(res => res.json())
     .then(data => setInventoryItem(data))
 },[])

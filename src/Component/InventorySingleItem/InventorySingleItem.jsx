@@ -6,6 +6,7 @@ import auth from '../../firebase.init';
 const InventorySingleItem = ({item}) => {
 
   const [newDescription, setNewDescription] = useState("")
+  const [newPdName, setPdName] = useState("")
 
   useEffect(() =>{
     if(item.description.length > 100){
@@ -13,10 +14,19 @@ const InventorySingleItem = ({item}) => {
     }else{
       setNewDescription(item.description)
     }
+
+    if(item.productName.length > 32){
+      setPdName(item.productName.slice(0, 32) + "...")
+    }else{
+      setPdName(item.productName)
+    }
   }, [item])
 
 
 
+
+
+console.log(item);
 
 
     return (
@@ -24,12 +34,12 @@ const InventorySingleItem = ({item}) => {
             <div className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row max-w-auto border-gray-700 bg-gray-800 overflow-hidden ">
               <img
                 className="object-cover w-full h-full rounded-t-lg md:h-auto md:w-[21rem] md:rounded-none md:rounded-l-lg "
-                src={item?.image}
+                src={item?.imgUrl}
                 alt="Inventory Item"
               />
               <div className="flex flex-col justify-between p-4 leading-normal text-white font-normal text-xl">
-                <h5 className="mb-2 text-2xl font-[500] tracking-tight ">{item?.name}</h5>
-                <p className="mb-3 text-gray-700 dark:text-gray-400">{newDescription}</p>
+                <h5 title={item?.productName} className="mb-2 text-2xl font-[500] tracking-tight ">{newPdName}</h5>
+                <p title={item?.description} className="mb-3 text-gray-700 dark:text-gray-400">{newDescription}</p>
                 <p className="mb-4">Supplier: Daraz BD</p>
 
                 <div className="flex justify-between items-center mb-3 text-xl font-[500] text-center">
