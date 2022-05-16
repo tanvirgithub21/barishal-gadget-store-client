@@ -17,14 +17,17 @@ const AddItem = () => {
 
 
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = (data) => { 
+    data.email= user?.email
+    
     // Simple POST request with a JSON body using fetch
     fetch("http://localhost:5000/addItem", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({...data,  }),
+      body: JSON.stringify(data),
+ 
     })
       .then((res) => res.json())
       .then(data => data?.acknowledged ? toast.success("Add Item successful") : toast.error("Somethin Wrong"))

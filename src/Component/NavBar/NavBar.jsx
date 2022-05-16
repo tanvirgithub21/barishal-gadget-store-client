@@ -26,7 +26,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="navBar bg-[#ebebeb] shadow-lg">
+    <nav className="navBar bg-[#ebebeb] shadow-lg z[99999999999999999999999999]">
       <div className="max-w-[1024px] h-[5rem] mx-auto flex justify-between items-center px-[.6rem]">
         <div className="logoAndLink w-full md:w-[29rem] bg-[#ebebeb] h-[5rem] flex justify-between items-center z-20">
           <h1 className="logo text-[2rem] font-semibold text-[#000000] ">
