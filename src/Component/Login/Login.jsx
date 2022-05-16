@@ -18,6 +18,8 @@ const Login = () => {
   const [logInUser] = useAuthState(auth)
   let form = location.state?.form?.pathname || "/";
 
+  console.log(logInUser);
+
 
   const [ signInWithEmailAndPassword, user, signInLoading, signInError, ] = useSignInWithEmailAndPassword(auth);
 
@@ -41,6 +43,7 @@ const Login = () => {
     //login With Email and Password
     signInWithEmailAndPassword(email, password)
     reset()
+
   };
   
   //Sing In With Google Account

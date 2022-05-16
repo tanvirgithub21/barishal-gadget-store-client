@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import auth from "../../firebase.init";
 import Loading from "../Loading/Loading";
 import NewSingleProduct from "../NewSingleProduct/NewSingleProduct";
 import TrendingSinglePd from "../TrendingSinglePd/TrendingSinglePd";
@@ -29,6 +30,7 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => setTrendingProduct(data));
   }, []);
+
 
   return (
     <div>

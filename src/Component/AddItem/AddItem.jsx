@@ -1,164 +1,186 @@
-import React, { useState } from "react";
+import { async } from "@firebase/util";
+import { React, useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useForm } from "react-hook-form";
+import { MdKeyboardArrowLeft } from "react-icons/md";
+import { toast } from "react-toastify";
+import auth from "../../firebase.init";
 
 const AddItem = () => {
-    
-    const [todayDate, settodayDate] = useState(new Date());//this year month date
-    const [thisYear, setThisYear] = useState(new Date().toISOString().slice(0, 4));//this year
-    const [thisMonth, setThisMonth] = useState(new Date().toISOString().slice(5, 7));//this month
-    const [thisDate, setThisDate] = useState(new Date().toISOString().slice(8, 10));//this date
+  const [user] = useAuthState(auth);
+  
+  const [todayDate, settodayDate] = useState(new Date()); //this year month date
+  const date = ("0" + todayDate.getDate()).slice(-2) + "-" + ("0" + (todayDate.getMonth() + 1)).slice(-2) + "-" + todayDate.getFullYear()
 
-    const handelBackButton = () =>{
-      window.history.back();  
-  }
+
+  console.log(user);
+
+
+  const { register, handleSubmit, reset } = useForm();
+  const onSubmit = (data) => {
+    // Simple POST request with a JSON body using fetch
+    fetch("http://localhost:5000/addItem", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({...data,  }),
+    })
+      .then((res) => res.json())
+      .then(data => data?.acknowledged ? toast.success("Add Item successful") : toast.error("Somethin Wrong"))
+      // .then((data) => console.log(data?.acknowledged));
+
+    reset();
+  };
 
   return (
     <section>
-      <div className="sectionContainer">
+      <div className="sectionContainer relative">
 
-        <form className="bg-[#1f2937] p-10 my-12 rounded-2xl">
+      {/* back button  */}
+      <div className="backBtn flex justify-start text-slate-100 sm:absolute sm:top-6 sm:left-5 mt-4 ml-4 sm:mt-0 sm:ml-0">
+            <button onClick={() => window.history.back()} className="flex items-center text-xl font-semibold bg-sky-600 pr-5 rounded-lg cursor-pointer py-2"><MdKeyboardArrowLeft className="text-4xl"/> BACK</button>
+      </div>
 
-            <div className="title flex justify-center text-4xl text-gray-300 mb-12">
-                <p>Add Item</p>
-            </div>
-            
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="bg-[#1f2937] p-10 my-12 rounded-2xl"
+        >
+          <div className="title flex justify-center text-4xl text-gray-300 mb-12">
+            <p>Add Item</p>
+          </div>
+
           <div className="grid gap-6 mb-6 lg:grid-cols-2">
             <div>
-              <label
-                className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300"
-              >
+              <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
                 Product Name
               </label>
               <input
+                {...register("productName")}
                 type="text"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Enter Product Name"
-                required=""
+                required
               />
             </div>
             <div>
-              <label
-                className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300"
-              >
+              <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
                 Supplier Name
               </label>
               <input
+                {...register("supplier")}
                 type="text"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Enter Supplier Name"
-                required=""
+                required
               />
             </div>
             <div>
-              <label
-                className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300"
-              >
+              <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
                 Quantity
               </label>
               <input
+                {...register("quantity")}
                 type="number"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Enter product Quantity"
-                required=""
+                required
               />
             </div>
             <div>
-              <label
-                className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300"
-              >
+              <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
                 Price
               </label>
               <input
+                {...register("price")}
                 type="number"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Enter product Price"
-                required=""
+                required
               />
             </div>
 
-            <div>
-              <label
-                className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300"
-              >
+            {/* <div>
+              <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
                 Manage user Email
               </label>
               <input
+                {...register("email")}
                 type="email"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Your Email"
-                required=""
+                required
+                readOnly
+                disabled
+              />
+            </div> */}
+
+            <div className="mb-6">
+              <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
+                Image
+              </label>
+              <input
+                {...register("imgUrl")}
+                type="url"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="product image url"
+                required
               />
             </div>
 
             <div>
-              <label
-                className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300"
-              >
+              <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
                 Rating
               </label>
               <input
+                {...register("rating")}
                 type="number"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="5 or 4.5 or 4 or 3.5 or 3"
-                required=""
+                required
               />
             </div>
 
-          <div>
-            <label
-              className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300"
-            >
-              Category
-            </label>
-            <input
-              type="text"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="product Category"
-              required=""
-            />
-          </div>
+            <div>
+              <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
+                Category
+              </label>
+              <input
+                {...register("category")}
+                type="text"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="product Category"
+                required
+              />
+            </div>
 
-          <div>
-            <label
-              className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300"
-            >
-              Date
-            </label>
-            <input
-              type="text"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              value={("0" + todayDate.getDate()).slice(-2) +"-" + ("0" + (todayDate.getMonth() + 1)).slice(-2) +"-" + todayDate.getFullYear()}
-              readOnly
-            />
+            <div>
+              <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
+                Date
+              </label>
+             <input
+                {...register("date")}
+                // onChange={e => setNewDate(e.target.value)}
+                type="text"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                defaultValue={date}
+                readOnly
+                // disabled
+              />
+            </div>
           </div>
-          </div>{/* grid gap this aria */}
-
+          {/* grid gap this aria */}
 
           <div className="mb-6">
-            <label
-              className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300"
-            >
-              Image
-            </label>
-            <input
-              type="url"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="product image url"
-              required=""
-            />
-          </div>
-          
-
-          <div className="mb-6">
-            <label
-              className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300"
-            >
+            <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
               Description
             </label>
-            <input
+            <textarea
+              {...register("description")}
               type="text"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 min-h-[12rem] sm:min-h-[10rem]"
               placeholder="product Description"
-              required=""
+              required
             />
           </div>
           <button
