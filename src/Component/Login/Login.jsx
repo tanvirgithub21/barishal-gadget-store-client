@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { async } from "@firebase/util";
 
 
 //email and pass regex
@@ -29,14 +30,14 @@ const Login = () => {
     //email valid function
     if (email.match(regexEmail)) {
       //no work hear
-    } else {
+    }else if(!email.match(regexEmail)) {
       return toast.error("Please Input Valid Email");
     }
 
     //password valid function
-    if (password.match(regexPassword)) {
+    else if (password.match(regexPassword)) {
       //no work hear
-    } else {
+    } else if (password.match(regexPassword)) {
       return toast.error("Minimum eight characters, One letter & one number");
     }
 
@@ -60,7 +61,7 @@ const Login = () => {
 
 
 
-  if(logInUser){
+  if(logInUser?.emailVerified){
     navigate(form, {replace: true})
   }
 
@@ -100,7 +101,7 @@ const Login = () => {
                   className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
-              <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700 w-full font-[500]">
+              <button type="submit" className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700 w-full font-[500]">
                 Login
               </button>
               <div className="flex justify-between items-center pt-5 pb-8">

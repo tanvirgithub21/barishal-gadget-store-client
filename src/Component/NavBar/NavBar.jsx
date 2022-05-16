@@ -25,6 +25,8 @@ const NavBar = () => {
       navigate("/home")
   };
 
+
+
   return (
     <nav className="navBar bg-[#ebebeb] shadow-lg z[99999999999999999999999999]">
       <div className="max-w-[1024px] h-[5rem] mx-auto flex justify-between items-center px-[.6rem]">
@@ -57,7 +59,7 @@ const NavBar = () => {
             </li>
           </ul>
 
-          {loginUser?.email ? (
+          {loginUser?.emailVerified ? (
             <ul>
               <li className="">
                 <NavLink
