@@ -13,8 +13,6 @@ const AddItem = () => {
   const date = ("0" + todayDate.getDate()).slice(-2) + "-" + ("0" + (todayDate.getMonth() + 1)).slice(-2) + "-" + todayDate.getFullYear()
 
 
-  console.log(user);
-
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => { 

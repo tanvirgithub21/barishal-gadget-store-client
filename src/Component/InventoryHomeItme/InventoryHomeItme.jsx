@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { BsFillStarFill } from "react-icons/bs";
 import Rating from '../Rating/Rating';
 
+const InventoryHomeItme = ({product}) => {
 
-const TrendingSinglePd = ({product}) => {
+    console.log(product);
 
-
-    
-    const {rating, productName, price, imgUrl } = product;
+    const {rating, productName, price, imgUrl} = product;
     const [newProductName, setNewProductName] = useState("")
-
     useEffect(()=>{
-        if(productName?.length > 25){
-            setNewProductName(productName.slice(0, 23) + "...")
+        if(productName.length > 25){
+            setNewProductName(productName.slice(0, 21) + "...")
         }else{
             setNewProductName(productName)
         }
     },[])
 
     return (
-        <div className="trendingPd w-auto shadow-xl p-1 sm:p-4 bg-[#f3f3f3] rounded-xl overflow-hidden ">
+        <div className="trendingPd w-auto shadow-xl p-1 sm:p-4 bg-[#e2e2e2] rounded-xl overflow-hidden ">
         <div className="imgBox rounded-xl overflow-hidden mb-5">
             <img src={imgUrl} alt="Images" />
         </div>
@@ -29,10 +26,9 @@ const TrendingSinglePd = ({product}) => {
                 <Rating rating={rating}/>
             </div>
             <p>$ <span>{price}</span></p>
-            <button className='addCardBtn'>Add to Card</button>
         </div>
     </div>
     );
 };
 
-export default TrendingSinglePd;
+export default InventoryHomeItme;

@@ -73,7 +73,7 @@ const ManageItem = () => {
           </h3>
         </div>
 
-        <div className="p-2 bg-[#f1f1f1] rounded-3xl">
+        <div className="p-2 bg-[#ffffff] rounded-3xl">
           <div className="flex justify-between items-center mt-10 px-10">
           <h4 className="text-[1.7rem] sm:text-4xl text-[#494949] font-[500]">Total Product: {manageItem?.length}</h4>
             <Link

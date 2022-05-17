@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { BsFillStarFill } from "react-icons/bs";
 import Rating from '../Rating/Rating';
 
 const NewSingleProduct = ({product}) => {
 
-    const {rating, productName, price, image} = product;
+    console.log(product);
+
+    const {rating, productName, price, imgUrl} = product;
     const [newProductName, setNewProductName] = useState("")
     useEffect(()=>{
         if(productName.length > 25){
@@ -15,19 +16,17 @@ const NewSingleProduct = ({product}) => {
     },[])
 
     return (
-        <div className='w-full h-auto bg-[#f1f1f1] shadow-md rounded-lg overflow-hidden my-9'>
-            <div className="relative image w-full h-[70px] sm:h-[130px] md:h-[200px] overflow-hidden rounded-lg mx-auto my-1">
-                <img className='object-cover w-full h-full' src={image} alt="images" />
-                <div className="newTag absolute top-1 sm:top-3 md:top-5 left-1 sm:left-3 md:left-5 bg-[#56cb82] text-[#fff] font-semibold rounded-3xl text-sm md:text-2xl px-2 md:px-4 py-[2px] md:py-1">New</div>
+        <div className="trendingPd w-auto shadow-xl p-1 sm:p-4 bg-[#f3f3f3] rounded-xl overflow-hidden ">
+        <div className="imgBox rounded-xl overflow-hidden mb-5">
+            <img src={imgUrl} alt="Images" />
+        </div>        <div className="trendingPdInfo text-[1rem] sm:text-xl md:text-2xl font-[500] text-center">
+            <h3 title={productName} className='cursor-pointer'>{newProductName}</h3>
+            <div className='flex justify-center items-center my-2 text-[#f1c100]'>
+                <Rating rating={rating}/>
             </div>
-            <div className="productInfo p-0 sm:p-2 my-0 md:my-3 text-center text-[1rem] sm:text-[1rem] md:text-2xl font-[500] text-[#000015c8]">
-                <h4 className='cursor-pointer' title={productName}>{newProductName}</h4>
-                <div className="priceAndRating text-xs sm:text-[1rem] md:text-[1.4rem] ">
-                    <div className="rating flex justify-center my-1 md:my-3 text-[#f9cb00]"><Rating rating={rating}/></div>
-                    <p className='font-semibold text-[1rem] mb-2 sm:my-2 md:my-3'><span>$</span> {price}</p>
-                </div>
-            </div>
+            <p>$ <span>{price}</span></p>
         </div>
+    </div>
     );
 };
 

@@ -10,7 +10,7 @@ const InventorySingleItem = ({item}) => {
 
   useEffect(() =>{
     if(item.description.length > 100){
-      setNewDescription(item.description.slice(0, 98) + "...")
+      setNewDescription(item.description.slice(0, 100) + "...")
     }else{
       setNewDescription(item.description)
     }

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 const imageUrl =
   "https://raw.githubusercontent.com/tanvirgithub21/assainment-11-data/main/rsz_60111.jpg";
 
@@ -10,26 +12,40 @@ const imageUrl =
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 const ForgotPassword = () => {
+  const { register, handleSubmit } = useForm();
 
-  const {register, handleSubmit,} = useForm()
+  const [validEmail, setValidEmail] = useState("");
 
-  const [validEmail, setValidEmail] = useState("")
+  const [sendPasswordResetEmail, sending, error] =
+    useSendPasswordResetEmail(auth);
 
-  const onSubmit = ({email}) =>{
-    if(email.match(regexEmail)){
-      setValidEmail(email)
-    }else{
-      return toast.error("Please Input Valid Email")
+
+  const onSubmit = async ({ email }) => {
+    if (email.match(regexEmail)) {
+      setValidEmail(email);
+    } else if (!email.match(regexEmail)) {
+      return toast.error("Please Input Valid Email");
     }
-  }
 
+    await sendPasswordResetEmail(email);
+
+    if (error) {
+      return toast.error(`${error?.message.slice(22, -2)?.toUpperCase()}`);
+    } else if (!error) {
+      toast.success("Check your Email");
+    }
+  };
 
   return (
     <div className=" bg-gray-100">
       <div className="sectionContainer relative">
-
         <div className="backBtn flex justify-start text-slate-100 sm:absolute sm:top-6 sm:left-5 mt-4 ml-4 sm:mt-0 sm:ml-0">
-            <button onClick={() => window.history.back()} className="flex items-center text-xl font-semibold bg-sky-600 pr-5 rounded-lg cursor-pointer py-2"><MdKeyboardArrowLeft className="text-4xl"/> BACK</button>
+          <button
+            onClick={() => window.history.back()}
+            className="flex items-center text-xl font-semibold bg-sky-600 pr-5 rounded-lg cursor-pointer py-2"
+          >
+            <MdKeyboardArrowLeft className="text-4xl" /> BACK
+          </button>
         </div>
 
         <div className="flex sm:items-center justify-center sm:min-h-screen mb-20 sm:mb-0">

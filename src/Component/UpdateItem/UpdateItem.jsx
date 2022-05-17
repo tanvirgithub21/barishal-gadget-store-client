@@ -10,7 +10,7 @@ const UpdateItem = () => {
   const [newDescription, setNewDescription] = useState("");
   const [newPdName, setPdName] = useState("");
   const [newQuantity, setNewQuantity] = useState(0);
-  const [quantity, setQuantity] = useState(0);
+  const [updateQuantity, setUpdateQuantity] = useState(0);
 
   const [updateItem, setUpdateItem] = useState({});
 
@@ -21,10 +21,6 @@ const UpdateItem = () => {
   }, [newQuantity]);
 
 
-  const addQuantity = (event) => {
-    event.preventDefault();
-    event.target.reset();
-  };
 
 
   useEffect(() => {
@@ -44,7 +40,7 @@ const UpdateItem = () => {
 
   useEffect(() => {
     setNewQuantity(parseInt(updateItem?.quantity));
-    setQuantity(newQuantity - 1);
+    setUpdateQuantity(newQuantity - 1);
   }, [updateItem, newQuantity]);
 
   //update url
@@ -60,14 +56,39 @@ const UpdateItem = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ quantity }),
+      body: JSON.stringify({ quantity: updateQuantity }),
     })
       .then((res) => res.json())
+      .then((data) => {
+        if(data?.modifiedCount > 0){
+          setNewQuantity(updateQuantity)
+        }
+      });
+  };
+
+
+  const addQuantity = (event) => {
+    event.preventDefault();
+    const quantityValue = parseInt(event.target.quantity.value);
+    if(quantityValue <= 0){
+      return toast.error("Input Positive Value")
+    }
+    const quantity = newQuantity + quantityValue
+    
+    fetch(itemUpdateUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ quantity }),
+    })
+    .then((res) => res.json())
       .then((data) => {
         if(data?.modifiedCount > 0){
           setNewQuantity(quantity)
         }
       });
+    event.target.reset();
   };
 
   return (

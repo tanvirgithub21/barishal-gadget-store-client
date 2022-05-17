@@ -26,7 +26,7 @@ const Login = () => {
 
   const { register, handleSubmit, reset } = useForm();
   
-  const onSubmit = ({ email, password }) => {
+  const onSubmit = async({ email, password }) => {
     //email valid function
     if (email.match(regexEmail)) {
       //no work hear
@@ -42,7 +42,7 @@ const Login = () => {
     }
 
     //login With Email and Password
-    signInWithEmailAndPassword(email, password)
+    await signInWithEmailAndPassword(email, password)
     reset()
 
   };

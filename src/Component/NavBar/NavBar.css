@@ -3,6 +3,7 @@
     z-index: 99;
     width: 100%;
     top: 0;left: 0;
+    background-color: #e9fcff;
 }
 .navLink ul li{
     display: inline;
