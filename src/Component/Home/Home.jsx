@@ -124,7 +124,7 @@ const Home = () => {
             Trending Product
           </h3>
 
-          <div className="grid grid-cols-3 gap-6 my-12 border-b-2 border-[#00000019] pb-14 mb-52">
+          <div className="grid grid-cols-3 gap-6 my-6 sm:my-12 border-b-2 border-[#00000019] pb-14 mb-12 sm:mb-52">
             {trending.map((pd) => (
               <TrendingSinglePd key={pd._id} product={pd} />
             ))}

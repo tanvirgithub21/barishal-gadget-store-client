@@ -28,7 +28,7 @@ const NavBar = () => {
 
 
   return (
-    <nav className="navBar bg-[#ebebeb] shadow-lg z[99999999999999999999999999]">
+    <nav className="navBar bg-[#e9fcff] shadow-lg z-50">
       <div className="max-w-[1024px] h-[5rem] mx-auto flex justify-between items-center px-[.6rem]">
         <div className="logoAndLink w-full md:w-[29rem] bg-[#e9fcff] h-[5rem] flex justify-between items-center z-20">
           <h1 className="logo text-[2rem] font-semibold text-[#000000] ">
@@ -37,10 +37,10 @@ const NavBar = () => {
         </div>
 
         <div
-          className="navLink justify-between w-full md:flex z-10"
+          className="navLink bg-[#e9fcff] justify-between w-full md:flex z-10"
           id={open ? "openNavLink" : "closeNavLink"}
         >
-          <ul>
+          <ul className="bg-[#e9fcff]">
             <li className="">
               <NavLink
                 to="/home"
@@ -60,7 +60,7 @@ const NavBar = () => {
           </ul>
 
           {loginUser?.emailVerified ? (
-            <ul>
+            <ul className="bg-[#e9fcff]">
               <li className="">
                 <NavLink
                   to="/manageItem"
@@ -101,7 +101,7 @@ const NavBar = () => {
               </li>
             </ul>
           ) : (
-            <ul>
+            <ul  className="bg-[#e9fcff]">
               <li className="">
                 <NavLink
                   to="/login"
@@ -129,7 +129,7 @@ const NavBar = () => {
         {/* responsive menu button  */}
         <button
           onClick={() => setOpen(!open)}
-          className="menuBtn text-[2.7rem] bg-[#ebebeb] h-[5rem] z-20"
+          className="menuBtn text-[2.7rem] bg-[#e9fcff] h-[5rem] z-20"
         >
           {open ? <BsXSquare /> : <BsJustifyRight />}
         </button>

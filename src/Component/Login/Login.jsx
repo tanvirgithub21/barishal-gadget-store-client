@@ -58,16 +58,13 @@ const Login = () => {
   }, [signInError])
 
 
-
-
-
   if(logInUser?.emailVerified){
     navigate(form, {replace: true})
   }
 
   return (
     <div>
-      <div className="flex sm:items-center justify-center sm:min-h-screen bg-gray-100">
+      <div className="flex sm:items-center justify-center sm:min-h-screen bg-[#e9fcff]">
         <div className="px-8 sm:py-6 sm:mt-4 text-left bg-white shadow-lg w-[45rem] rounded-xl">
           <h3 className="text-2xl md:text-4xl mt-24 sm:mt-8 font-bold text-center">
             Login to your account

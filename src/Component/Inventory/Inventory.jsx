@@ -23,7 +23,7 @@ useEffect(() =>{
 
   return (
     <section>
-      <div className="sectionContainer">
+      <div className="sectionContainer min-h-screen">
         <h2 className="SectionHeader">Inventory Items</h2>
 
         <div className="inventoryItemBox grid grid-cols-1 sm:grid-cols-2 gap-8 mx-6 sm:mx-0 my-10">

@@ -12,12 +12,11 @@ const imageUrl =
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 const ForgotPassword = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const [validEmail, setValidEmail] = useState("");
 
-  const [sendPasswordResetEmail, sending, error] =
-    useSendPasswordResetEmail(auth);
+  const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(auth);
 
 
   const onSubmit = async ({ email }) => {
@@ -33,11 +32,12 @@ const ForgotPassword = () => {
       return toast.error(`${error?.message.slice(22, -2)?.toUpperCase()}`);
     } else if (!error) {
       toast.success("Check your Email");
+      reset()
     }
   };
 
   return (
-    <div className=" bg-gray-100">
+    <div className="  bg-[#e9fcff]">
       <div className="sectionContainer relative">
         <div className="backBtn flex justify-start text-slate-100 sm:absolute sm:top-6 sm:left-5 mt-4 ml-4 sm:mt-0 sm:ml-0">
           <button

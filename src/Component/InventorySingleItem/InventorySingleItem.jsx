@@ -22,13 +22,6 @@ const InventorySingleItem = ({item}) => {
     }
   }, [item])
 
-
-
-
-
-console.log(item);
-
-
     return (
         <div className="inventoryItemBox">
             <div className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row max-w-auto border-gray-700 bg-gray-800 overflow-hidden ">
