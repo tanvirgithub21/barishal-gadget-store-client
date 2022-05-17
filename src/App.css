@@ -1,110 +1,116 @@
 /* google font Roboto   ** font-family: 'Roboto', sans-serif **                 */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
 /* google font Poppins   ** font-family: 'Poppins', sans-serif **                 */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800&display=swap");
 
-html{
+html {
   font-size: 62.5%;
 }
 
-*{
+* {
   box-sizing: border-box;
-  margin: 0;padding: 0;
+  margin: 0;
+  padding: 0;
   list-style: none;
   text-decoration: none;
 }
-h1,h2,h3,h4,h5,h6{
-  font-family: 'Roboto', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", sans-serif;
 }
-body{
-  font-family: 'Poppins', sans-serif;
+body {
+  font-family: "Poppins", sans-serif;
+  background-color:#e9fcff;
 }
-ul{
+ul {
   font-size: 1.6rem;
   font-weight: 500;
 }
-li{
+li {
   cursor: pointer;
 }
-.sectionContainer{
+.sectionContainer {
   max-width: 1024px;
   margin: auto;
   padding: 0 1.2rem 0 1.2rem;
 }
-.SectionHeader{
+.SectionHeader {
   position: relative;
   font-size: 2.5rem;
   font-weight: 500;
   text-align: center;
   padding: 2rem 0 2rem 0;
 }
-.SectionHeader::after{
+.SectionHeader::after {
   position: absolute;
   top: -15%;
   left: 50%;
   content: "";
   width: 15%;
   height: 100%;
-  border-bottom: .3rem solid blue;
+  border-bottom: 0.3rem solid blue;
   transform: translateX(-50%);
 }
 
 /* add to card button  */
-.addCardBtn{
+.addCardBtn {
   background-color: #1e8bff;
-  color: #FFF;
+  color: #fff;
   font-weight: 500;
-  padding: .5rem .9rem;
+  padding: 0.5rem 0.9rem;
   border-radius: 1.5rem;
-  transition: ease-in-out .3s;
-  margin-top: .5rem;
-  margin-bottom: .5rem;
+  transition: ease-in-out 0.3s;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 /* add to card button hover */
-.addCardBtn:hover{
+.addCardBtn:hover {
   background-color: #0061c9;
   color: rgb(240, 240, 240);
 }
 
 /* both side line */
-.bothSideLine::after{
+.bothSideLine::after {
   content: "-----";
-  margin-left: .6rem;
+  margin-left: 0.6rem;
 }
-.bothSideLine::before{
+.bothSideLine::before {
   content: "-----";
-  margin-right: .6rem;
+  margin-right: 0.6rem;
 }
 
-.tostContainer{
+.tostContainer {
   font-size: 1.6rem;
 }
 
 /* Responsive style section header */
-@media only screen and (max-width: 768px){
-  .SectionHeader{
+@media only screen and (max-width: 768px) {
+  .SectionHeader {
     font-size: 2rem;
     padding: 2rem 0 2rem 0;
   }
-  .SectionHeader::after{
+  .SectionHeader::after {
     top: -25%;
     width: 35%;
     height: 100%;
   }
-  
 }
-@media only screen and (max-width: 640px){
-        /* section header style  */
-        .SectionHeader{
-          font-size: 1.4rem;
-          padding: 2rem 0 2rem 0;
-        }
-        .SectionHeader::after{
-          top: -25%;
-          width: 28%;
-          height: 100%;
-          border-bottom: .2rem solid blue;
-        }
+@media only screen and (max-width: 640px) {
+  /* section header style  */
+  .SectionHeader {
+    font-size: 1.4rem;
+    padding: 2rem 0 2rem 0;
+  }
+  .SectionHeader::after {
+    top: -25%;
+    width: 28%;
+    height: 100%;
+    border-bottom: 0.2rem solid blue;
+  }
 }

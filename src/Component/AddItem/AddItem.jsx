@@ -8,16 +8,19 @@ import auth from "../../firebase.init";
 
 const AddItem = () => {
   const [user] = useAuthState(auth);
-  
+
   const [todayDate, settodayDate] = useState(new Date()); //this year month date
-  const date = ("0" + todayDate.getDate()).slice(-2) + "-" + ("0" + (todayDate.getMonth() + 1)).slice(-2) + "-" + todayDate.getFullYear()
-
-
+  const date =
+    ("0" + todayDate.getDate()).slice(-2) +
+    "-" +
+    ("0" + (todayDate.getMonth() + 1)).slice(-2) +
+    "-" +
+    todayDate.getFullYear();
 
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => { 
-    data.email= user?.email
-    
+  const onSubmit = (data) => {
+    data.email = user?.email;
+
     // Simple POST request with a JSON body using fetch
     fetch("http://localhost:5000/addItem", {
       method: "POST",
@@ -25,23 +28,30 @@ const AddItem = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
- 
     })
       .then((res) => res.json())
-      .then(data => data?.acknowledged ? toast.success("Add Item successful") : toast.error("Somethin Wrong"))
-      // .then((data) => console.log(data?.acknowledged));
+      .then((data) =>
+        data?.acknowledged
+          ? toast.success("Add Item successful")
+          : toast.error("Somethin Wrong")
+      );
+ 
 
     reset();
   };
 
   return (
-    <section>
+    <section className=" bg-[#e9fcff]">
       <div className="sectionContainer relative">
-
-      {/* back button  */}
-      <div className="backBtn flex justify-start text-slate-100 sm:absolute sm:top-6 sm:left-5 mt-4 ml-4 sm:mt-0 sm:ml-0">
-            <button onClick={() => window.history.back()} className="flex items-center text-xl font-semibold bg-sky-600 pr-5 rounded-lg cursor-pointer py-2"><MdKeyboardArrowLeft className="text-4xl"/> BACK</button>
-      </div>
+        {/* back button  */}
+        <div className="backBtn flex justify-start text-slate-100 sm:absolute sm:top-6 sm:left-5 mt-4 ml-4 sm:mt-0 sm:ml-0">
+          <button
+            onClick={() => window.history.back()}
+            className="flex items-center text-xl font-semibold bg-sky-600 pr-5 rounded-lg cursor-pointer py-2"
+          >
+            <MdKeyboardArrowLeft className="text-4xl" /> BACK
+          </button>
+        </div>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -101,21 +111,6 @@ const AddItem = () => {
               />
             </div>
 
-            {/* <div>
-              <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
-                Manage user Email
-              </label>
-              <input
-                {...register("email")}
-                type="email"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Your Email"
-                required
-                readOnly
-                disabled
-              />
-            </div> */}
-
             <div className="mb-6">
               <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
                 Image
@@ -159,14 +154,12 @@ const AddItem = () => {
               <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
                 Date
               </label>
-             <input
+              <input
                 {...register("date")}
-                // onChange={e => setNewDate(e.target.value)}
                 type="text"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 defaultValue={date}
                 readOnly
-                // disabled
               />
             </div>
           </div>

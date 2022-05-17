@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import { BsJustifyRight, BsXSquare } from "react-icons/bs";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,7 +12,7 @@ const NavBar = () => {
 
   const [open, setOpen] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handelSingOut = () => {
     const auth = getAuth();
     signOut(auth)
@@ -22,19 +22,15 @@ const NavBar = () => {
       .catch((error) => {
         error && toast.error("Logout Failed");
       });
-      navigate("/home")
+    navigate("/home");
   };
-
-
 
   return (
     <nav className="navBar bg-[#e9fcff] shadow-lg z-50">
       <div className="max-w-[1024px] h-[5rem] mx-auto flex justify-between items-center px-[.6rem]">
-        <div className="logoAndLink w-full md:w-[29rem] bg-[#e9fcff] h-[5rem] flex justify-between items-center z-20">
-          <h1 className="logo text-[2rem] font-semibold text-[#000000] ">
-            Barishal Gadget Store<span className="text-[#ffb701]">|</span>
-          </h1>
-        </div>
+        <Link to="/home" className="logoAndLink w-full md:w-[29rem] h-[5rem] flex justify-between items-center z-20">
+          <img className="max-w-[15rem]" src="https://barishalgadgetstore.com/wp-content/uploads/2020/11/BLACK.png" alt="img" />
+        </Link>
 
         <div
           className="navLink bg-[#e9fcff] justify-between w-full md:flex z-10"
@@ -101,7 +97,7 @@ const NavBar = () => {
               </li>
             </ul>
           ) : (
-            <ul  className="bg-[#e9fcff]">
+            <ul className="bg-[#e9fcff]">
               <li className="">
                 <NavLink
                   to="/login"

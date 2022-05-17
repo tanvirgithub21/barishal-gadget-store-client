@@ -19,16 +19,17 @@ const TabileData = ({ item, getConfirm }) => {
       <td className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
         {newPdName}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap">
-        {item?._id}
-      </td>
+      <td className="px-6 py-4 whitespace-nowrap">{item?._id}</td>
       <td className="px-6 py-4">{item?.supplier}</td>
       <td className="px-8 py-4 font-medium text-gray-900 dark:text-white">
-      {item?.quantity}
+        {item?.quantity}
       </td>
-      <td className="px-6 py-4">&#36; {item?.price}</td>  
+      <td className="px-6 py-4">&#36; {item?.price}</td>
       <td className="px-6 py-4 text-right">
-        <button onClick={() => getConfirm(item?._id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+        <button
+          onClick={() => getConfirm(item?._id)}
+          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+        >
           Delete
         </button>
       </td>

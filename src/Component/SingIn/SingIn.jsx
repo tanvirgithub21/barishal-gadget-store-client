@@ -39,7 +39,7 @@ const SingIn = () => {
 
         //create user with email and password
         createUserWithEmailAndPassword(email, confirmPassword)
-        createUserError ? toast.error(`${createUserError?.message.slice(22, -2)?.toUpperCase()}`) : toast.success("Send Email Verification")
+        createUserError && toast.error(`${createUserError?.message.slice(22, -2)?.toUpperCase()}`)
         reset()//reset form value
         
       } else {
@@ -50,14 +50,15 @@ const SingIn = () => {
     }
 
     if(logInUser){
-      navigate(from, {replace:true})
+      toast.success("Send Email Verification")
+      return navigate("/login")
     }
 
 
   };
 
   return (
-    <div className=" bg-[#e9fcff]">
+    <div >
       <div className="sectionContainer relative">
         <div className="backBtn flex justify-start text-slate-100 sm:absolute sm:top-6 sm:left-5 mt-4 ml-4 sm:mt-0 sm:ml-0 mb-5 sm:mb-0">
           <button

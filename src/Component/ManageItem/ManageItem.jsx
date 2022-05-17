@@ -3,44 +3,53 @@ import TabileData from "../TabileData/TabileData";
 import { FiPlusSquare } from "react-icons/fi";
 import { Link, Navigate } from "react-router-dom";
 import { BiErrorAlt } from "react-icons/bi";
+import Loading from "../Loading/Loading";
 const ManageItem = () => {
+
+  //loading tiger
+  const [loading, setLoading] = useState(true);
+  
   const [manageItem, setManageItem] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/allItems")
       .then((res) => res.json())
-      .then((data) => setManageItem(data));
+      .then((data) => {
+        setManageItem(data)
+        setLoading(false)
+      });
   }, []);
 
+    
+
   const [confirm, setConfirm] = useState(false); //open confirm mass
-  const [deleteConfirm, setDeleteConfirm] = useState(false)
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
 
-  const [deletePdId, setDeletePdId] = useState(null)
+  const [deletePdId, setDeletePdId] = useState(null);
 
-  const getConfirm = (id) =>{
-    setDeletePdId(id)
-    setConfirm(true)
-  }
+  const getConfirm = (id) => {
+    setDeletePdId(id);
+    setConfirm(true);
+  };
 
-  const deleteItem = (id) =>{
+  const deleteItem = (id) => {
+    setConfirm(false);
 
-    setConfirm(false)
-
-      const url = `http://localhost:5000/item/delete/${id}`
-      fetch(url, {
-        method: "delete",
-      })
-      .then(res => res.json())
-      .then(data => {
-        if(data.deletedCount > 0){
-          const reminding = manageItem.filter(product => product._id != id)
-          setManageItem(reminding)
+    const url = `http://localhost:5000/item/delete/${id}`;
+    fetch(url, {
+      method: "delete",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          const reminding = manageItem.filter((product) => product._id != id);
+          setManageItem(reminding);
         }
-      })
-
-  }
+      });
+  };
 
   return (
-    <section className="relative">
+    <section className="relative  bg-[#e9fcff]">
+      {loading && <Loading />}
       {confirm && (
         <div className="fixed top-0 right-0 w-screen h-screen bg-[#15191fe3] flex justify-center items-center z-50">
           <div className="w-[320px] p-8 bg-[#374151] text-center text-2xl text-[#ffffffd8] rounded-lg border border-[#ffffff7e]">
@@ -49,7 +58,10 @@ const ManageItem = () => {
             </div>
             <p>Are you sure you want to delete this product?</p>
             <div className="flex justify-evenly items-center mt-8">
-              <button onClick={() => deleteItem(deletePdId)} className="bg-[#c51b1b] hover:bg-[#830f0f] border border-[#c51b1b] hover:border-[#830f0f] px-5 py-2 rounded-xl font-[500] text-xl">
+              <button
+                onClick={() => deleteItem(deletePdId)}
+                className="bg-[#c51b1b] hover:bg-[#830f0f] border border-[#c51b1b] hover:border-[#830f0f] px-5 py-2 rounded-xl font-[500] text-xl"
+              >
                 Yes, I'm sure
               </button>
               <button
@@ -73,9 +85,11 @@ const ManageItem = () => {
           </h3>
         </div>
 
-        <div className="p-2 bg-[#ffffff] rounded-3xl">
+        <div className="p-2  bg-[#e9fcff] rounded-3xl">
           <div className="flex justify-between items-center mt-10 px-10">
-          <h4 className="text-[1.7rem] sm:text-4xl text-[#494949] font-[500]">Total Product: {manageItem?.length}</h4>
+            <h4 className="text-[1.7rem] sm:text-4xl text-[#494949] font-[500]">
+              Total Product: {manageItem?.length}
+            </h4>
             <Link
               to="/addItem"
               className="px-5 sm:px-8 py-2 sm:py-4 bg-[#3369ff] hover:bg-[#5482ff] ease-in-out duration-300 rounded-md text-white
@@ -102,7 +116,11 @@ const ManageItem = () => {
               </thead>
               <tbody className="overflow-hidden">
                 {manageItem.map((item) => (
-                  <TabileData key={item?._id} item={item} getConfirm={getConfirm} />
+                  <TabileData
+                    key={item?._id}
+                    item={item}
+                    getConfirm={getConfirm}
+                  />
                 ))}
               </tbody>
             </table>

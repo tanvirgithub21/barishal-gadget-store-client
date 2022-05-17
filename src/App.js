@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
 import ManageItem from "./Component/ManageItem/ManageItem";
 import Footer from "./Component/Footer/Footer";
 import ForgotPassword from "./Component/ForgotPassword/ForgotPassword";

@@ -6,7 +6,7 @@ import auth from "../../firebase.init";
 
 const UpdateItem = () => {
   const { _id } = useParams();
-  
+
   const [newDescription, setNewDescription] = useState("");
   const [newPdName, setPdName] = useState("");
   const [newQuantity, setNewQuantity] = useState(0);
@@ -19,9 +19,6 @@ const UpdateItem = () => {
       .then((res) => res.json())
       .then((data) => setUpdateItem(data));
   }, [newQuantity]);
-
-
-
 
   useEffect(() => {
     if (updateItem?.description?.length > 100) {
@@ -37,7 +34,6 @@ const UpdateItem = () => {
     }
   }, [updateItem]);
 
-
   useEffect(() => {
     setNewQuantity(parseInt(updateItem?.quantity));
     setUpdateQuantity(newQuantity - 1);
@@ -47,9 +43,8 @@ const UpdateItem = () => {
   const itemUpdateUrl = `http://localhost:5000/item/update/${_id}`;
 
   const handelDeliver = () => {
-    console.log(newQuantity)
-    if(newQuantity <= 0){
-      return toast.error("Product Not Available")
+    if (newQuantity <= 0) {
+      return toast.error("Product Not Available");
     }
     fetch(itemUpdateUrl, {
       method: "PUT",
@@ -60,21 +55,20 @@ const UpdateItem = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if(data?.modifiedCount > 0){
-          setNewQuantity(updateQuantity)
+        if (data?.modifiedCount > 0) {
+          setNewQuantity(updateQuantity);
         }
       });
   };
 
-
   const addQuantity = (event) => {
     event.preventDefault();
     const quantityValue = parseInt(event.target.quantity.value);
-    if(quantityValue <= 0){
-      return toast.error("Input Positive Value")
+    if (quantityValue <= 0) {
+      return toast.error("Input Positive Value");
     }
-    const quantity = newQuantity + quantityValue
-    
+    const quantity = newQuantity + quantityValue;
+
     fetch(itemUpdateUrl, {
       method: "PUT",
       headers: {
@@ -82,10 +76,10 @@ const UpdateItem = () => {
       },
       body: JSON.stringify({ quantity }),
     })
-    .then((res) => res.json())
+      .then((res) => res.json())
       .then((data) => {
-        if(data?.modifiedCount > 0){
-          setNewQuantity(quantity)
+        if (data?.modifiedCount > 0) {
+          setNewQuantity(quantity);
         }
       });
     event.target.reset();

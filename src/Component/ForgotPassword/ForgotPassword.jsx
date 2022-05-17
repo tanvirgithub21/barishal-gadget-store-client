@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import Loading from "../Loading/Loading";
+
 const imageUrl =
   "https://raw.githubusercontent.com/tanvirgithub21/assainment-11-data/main/rsz_60111.jpg";
 
@@ -12,14 +14,18 @@ const imageUrl =
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 const ForgotPassword = () => {
+  //loading tiger
+  const [loading, setLoading] = useState(false);
+
   const { register, handleSubmit, reset } = useForm();
 
   const [validEmail, setValidEmail] = useState("");
 
-  const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(auth);
-
+  const [sendPasswordResetEmail, sending, error] =
+    useSendPasswordResetEmail(auth);
 
   const onSubmit = async ({ email }) => {
+    setLoading(true);
     if (email.match(regexEmail)) {
       setValidEmail(email);
     } else if (!email.match(regexEmail)) {
@@ -31,13 +37,15 @@ const ForgotPassword = () => {
     if (error) {
       return toast.error(`${error?.message.slice(22, -2)?.toUpperCase()}`);
     } else if (!error) {
+      setLoading(false);
       toast.success("Check your Email");
-      reset()
+      reset();
     }
   };
 
   return (
-    <div className="  bg-[#e9fcff]">
+    <div className=" relative bg-[#e9fcff]">
+      {loading && <Loading />}
       <div className="sectionContainer relative">
         <div className="backBtn flex justify-start text-slate-100 sm:absolute sm:top-6 sm:left-5 mt-4 ml-4 sm:mt-0 sm:ml-0">
           <button

@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import InventoryHomeItme from "../InventoryHomeItme/InventoryHomeItme";
 import InventorySingleItem from "../InventorySingleItem/InventorySingleItem";
+import Loading from "../Loading/Loading";
 import NewSingleProduct from "../NewSingleProduct/NewSingleProduct";
 import TrendingSinglePd from "../TrendingSinglePd/TrendingSinglePd";
 import "./Home.css";
 
 const Home = () => {
-  //   const homeBannerImage = "https://i.ibb.co/SrtgS5s/59356696-131018791330797-1345272259203301376-n.jpg";
   const homeBannerImage =
     "https://media.nedigital.sg/fairprice/images/d73e902e-c047-4bf2-84cc-c21da7d21326/MP-GadgetsLand-LandingBanner-Feb2021.jpg";
 
+  //loading tiger
+  const [loading, setLoading] = useState(true);
+
   //New Product data
   const [latestProducts, setLatestProduct] = useState([]);
-
   useEffect(() => {
     fetch("http://localhost:5000/allItems?category=New")
       .then((res) => res.json())
@@ -35,6 +36,7 @@ const Home = () => {
     fetch("http://localhost:5000/allItems?category=Trending")
       .then((res) => res.json())
       .then((data) => setTrendingProduct(data));
+    // setLoading(false);
   }, []);
 
   //trending product slice
@@ -52,7 +54,10 @@ const Home = () => {
   useEffect(() => {
     fetch("http://localhost:5000/allItems")
       .then((res) => res.json())
-      .then((data) => setInventoryItem(data));
+      .then((data) => {
+        setInventoryItem(data)
+        setLoading(false)
+      });
   }, []);
 
   //inventory product slice
@@ -64,8 +69,14 @@ const Home = () => {
     setInventory(newPd);
   }, [inventoryItem]);
 
+  
   return (
-    <div className=" bg-[#f5feff]">
+
+    
+    <div className=" relative bg-[#f5feff]">
+
+      {loading && <Loading />}
+
       {/* home banner section */}
       <section className="homeBanner relative w-full h-[45vh] md:h-[70vh] overflow-hidden bg-amber-600">
         {/* Perfect Image size 480 height and 1300 width */}

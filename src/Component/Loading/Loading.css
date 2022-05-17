@@ -1,14 +1,14 @@
 .loadingBox {
     position: fixed;
-    top: 0;left: 0;
+    top: 5rem;left: 0;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: calc(100vh - 5rem);
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(240, 248, 255, 0.852);
+    background-color: rgba(212, 236, 255, 0.922);
     cursor: progress;
     z-index: 99999999;
   }

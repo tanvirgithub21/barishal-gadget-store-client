@@ -4,33 +4,38 @@ import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
-import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { async } from "@firebase/util";
-
+import Loading from "../Loading/Loading";
 
 //email and pass regex
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const Login = () => {
-  
-  const location = useLocation()
-  const navigate = useNavigate()
-  const [logInUser] = useAuthState(auth)
-  let form = location.state?.form?.pathname || "/";
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [logInUser] = useAuthState(auth);
+  let form = location.state?.form?.pathname || "/"; 
 
-  console.log(logInUser);
+    //loading tiger
+    const [loading, setLoading] = useState(false);
+    
 
-
-  const [ signInWithEmailAndPassword, user, signInLoading, signInError, ] = useSignInWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword, user, signInLoading, signInError] =
+    useSignInWithEmailAndPassword(auth);
 
   const { register, handleSubmit, reset } = useForm();
-  
-  const onSubmit = async({ email, password }) => {
+
+  const onSubmit = async ({ email, password }) => {
     //email valid function
     if (email.match(regexEmail)) {
       //no work hear
-    }else if(!email.match(regexEmail)) {
+    } else if (!email.match(regexEmail)) {
       return toast.error("Please Input Valid Email");
     }
 
@@ -42,28 +47,30 @@ const Login = () => {
     }
 
     //login With Email and Password
-    await signInWithEmailAndPassword(email, password)
-    reset()
-
+    setLoading(true)
+    signInWithEmailAndPassword(email, password);
+    reset();
   };
-  
+
   //Sing In With Google Account
-  const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] = useSignInWithGoogle(auth);
-  const handleSingInGoogle = () =>{
+  const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
+    useSignInWithGoogle(auth);
+  const handleSingInGoogle = () => {
     signInWithGoogle();
-  }
-  
+  };
+
   useEffect(() => {
-    toast.error(signInError?.message.slice(22, -2).toUpperCase())
-  }, [signInError])
+    toast.error(signInError?.message.slice(22, -2).toUpperCase());
+  }, [signInError]);
 
-
-  if(logInUser?.emailVerified){
-    navigate(form, {replace: true})
+  if (logInUser?.emailVerified) {
+    setLoading(false)
+    navigate(form, { replace: true });
   }
 
   return (
-    <div>
+    <div className="relative">
+      {loading && <Loading />}
       <div className="flex sm:items-center justify-center sm:min-h-screen bg-[#e9fcff]">
         <div className="px-8 sm:py-6 sm:mt-4 text-left bg-white shadow-lg w-[45rem] rounded-xl">
           <h3 className="text-2xl md:text-4xl mt-24 sm:mt-8 font-bold text-center">
@@ -98,7 +105,10 @@ const Login = () => {
                   className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
-              <button type="submit" className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700 w-full font-[500]">
+              <button
+                type="submit"
+                className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700 w-full font-[500]"
+              >
                 Login
               </button>
               <div className="flex justify-between items-center pt-5 pb-8">
@@ -120,7 +130,10 @@ const Login = () => {
               </p>
 
               <div className="singInGoogleBtn flex justify-center items-center my-5  mb-24 sm:mb-0 ">
-                <div onClick={handleSingInGoogle} className="bg-slate-200 hover:bg-slate-300 ease-in-out duration-300 px-5 py-3 rounded-md flex justify-center items-center font-[500] text-slate-600 cursor-pointer">
+                <div
+                  onClick={handleSingInGoogle}
+                  className="bg-slate-200 hover:bg-slate-300 ease-in-out duration-300 px-5 py-3 rounded-md flex justify-center items-center font-[500] text-slate-600 cursor-pointer"
+                >
                   <FcGoogle className="mr-1 text-[2.5rem]" />
                   <p> SingIn with Google</p>
                 </div>

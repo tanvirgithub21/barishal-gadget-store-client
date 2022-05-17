@@ -3,15 +3,24 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import TabileData from "../TabileData/TabileData";
 import { BiErrorAlt } from "react-icons/bi";
+import Loading from "../Loading/Loading";
 
 const MyItem = () => {
+
+    //loading tiger
+    const [loading, setLoading] = useState(true);
+    
+
   const [myItem, setMyItem] = useState([]);
   const [logInUser] = useAuthState(auth);
   const url = `http://localhost:5000/allItems?email=${logInUser?.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setMyItem(data));
+      .then((data) => {
+        setMyItem(data)
+        setLoading(false)
+      });
   }, [logInUser]);
 
   // ================================================================================
@@ -44,7 +53,8 @@ const MyItem = () => {
 
   //=================================================================================
   return (
-    <div>
+    <div className="relative  bg-[#e9fcff]">
+      {loading && <Loading />}
       {confirm && (
         <div className="fixed top-0 right-0 w-screen h-screen bg-[#15191fe3] flex justify-center items-center z-50">
           <div className="w-[320px] p-8 bg-[#374151] text-center text-2xl text-[#ffffffd8] rounded-lg border border-[#ffffff7e]">
@@ -104,7 +114,11 @@ const MyItem = () => {
             <tbody className="">
               {/* Input table data component */}
               {myItem.map((item) => (
-                <TabileData key={item?._id} item={item} getConfirm={getConfirm}/>
+                <TabileData
+                  key={item?._id}
+                  item={item}
+                  getConfirm={getConfirm}
+                />
               ))}
             </tbody>
           </table>
