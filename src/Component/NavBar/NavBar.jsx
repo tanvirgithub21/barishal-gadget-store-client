@@ -28,8 +28,8 @@ const NavBar = () => {
   return (
     <nav className="navBar bg-[#e9fcff] shadow-lg z-50">
       <div className="max-w-[1024px] h-[5rem] mx-auto flex justify-between items-center px-[.6rem]">
-        <Link to="/home" className="logoAndLink w-full md:w-[29rem] h-[5rem] flex justify-between items-center z-20">
-          <img className="max-w-[15rem]" src="https://barishalgadgetstore.com/wp-content/uploads/2020/11/BLACK.png" alt="img" />
+        <Link to="/home" className="logoAndLink w-auto mr-8 h-[5rem] flex justify-between items-center z-20">
+          <img className="max-w-[14rem]" src="https://barishalgadgetstore.com/wp-content/uploads/2020/11/BLACK.png" alt="img" />
         </Link>
 
         <div

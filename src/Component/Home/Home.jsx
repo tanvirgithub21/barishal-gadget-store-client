@@ -3,11 +3,11 @@ import InventorySingleItem from "../InventorySingleItem/InventorySingleItem";
 import Loading from "../Loading/Loading";
 import NewSingleProduct from "../NewSingleProduct/NewSingleProduct";
 import TrendingSinglePd from "../TrendingSinglePd/TrendingSinglePd";
+import { BsFacebook, BsInstagram, BsGithub } from "react-icons/bs";
 import "./Home.css";
 
 const Home = () => {
-  const homeBannerImage =
-    "https://media.nedigital.sg/fairprice/images/d73e902e-c047-4bf2-84cc-c21da7d21326/MP-GadgetsLand-LandingBanner-Feb2021.jpg";
+  const homeBannerImage = "https://i.ibb.co/235B0nC/5317414.jpg";
 
   //loading tiger
   const [loading, setLoading] = useState(true);
@@ -55,8 +55,8 @@ const Home = () => {
     fetch("http://localhost:5000/allItems")
       .then((res) => res.json())
       .then((data) => {
-        setInventoryItem(data)
-        setLoading(false)
+        setInventoryItem(data);
+        setLoading(false);
       });
   }, []);
 
@@ -69,32 +69,39 @@ const Home = () => {
     setInventory(newPd);
   }, [inventoryItem]);
 
-  
   return (
-
-    
     <div className=" relative bg-[#f5feff]">
-
       {loading && <Loading />}
 
       {/* home banner section */}
-      <section className="homeBanner relative w-full h-[45vh] md:h-[70vh] overflow-hidden bg-amber-600">
-        {/* Perfect Image size 480 height and 1300 width */}
-        <img
-          className="w-full min-h-full object-cover "
-          src={homeBannerImage}
-          alt="home banner"
-        />
+      <section className="homeBanner w-full h-[50vh] md:h-[70vh] overflow-hidden">
 
-        <div className="bannerContainer">
-          <div className="bannerWrap">
-            <h2 className="bannerHeader">Barishal Gadget Store</h2>
-            <p className="bannerText">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam
-              unde fuga vero veritatis necessitatibus, obcaecati autem provident
-              blanditiis animi, quibusdam quod consequatur tempora officiis nam?
-            </p>
-          </div>
+        <div className="bannerContainer sectionContainer flex justify-end items-end h-full text-[#ffffff]">
+          <ul className="flex text-[1.5rem] md:text-[2rem] mb-10 mr-8">
+            <li className="mr-[3rem]">
+              <a
+                href="https://www.facebook.com/tanviruniquebd/"
+                target="_blank"
+              >
+                <BsFacebook />
+              </a>
+            </li>
+
+            <li className="mr-[3rem]">
+              <a
+                href="https://www.instagram.com/tan_vir_ahmed___/"
+                target="_blank"
+              >
+                <BsInstagram />
+              </a>
+            </li>
+
+            <li className="">
+              <a href="https://github.com/tanvirgithub21" target="_blank">
+                <BsGithub />
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
