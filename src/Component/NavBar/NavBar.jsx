@@ -53,6 +53,14 @@ const NavBar = () => {
                 Inventory
               </NavLink>
             </li>
+            <li className="">
+              <NavLink
+                to="/blog"
+                className={({ isActive }) => (isActive ? "active" : "deActive")}
+              >
+                Blog
+              </NavLink>
+            </li>
           </ul>
 
           {loginUser?.emailVerified ? (

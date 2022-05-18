@@ -15,6 +15,7 @@ import UpdateItem from "./Component/UpdateItem/UpdateItem";
 import AddItem from "./Component/AddItem/AddItem";
 import RequireAuth from "./Component/RequireAuth/RequireAuth";
 import MyItem from "./Component/MyItem/MyItem";
+import Blog from "./Component/Blog/Blog";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/inventory" element={<Inventory />} />
+        <Route path="/blog" element={<Blog />} />
         <Route
           path="/inventory/:_id"
           element={

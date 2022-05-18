@@ -89,6 +89,12 @@ li {
   font-size: 1.6rem;
 }
 
+/* box shadow  */
+.basic-drop-shadow{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+
 /* Responsive style section header */
 @media only screen and (max-width: 768px) {
   .SectionHeader {

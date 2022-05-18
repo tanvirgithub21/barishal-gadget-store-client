@@ -3,62 +3,62 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useAuthState, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-
 
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const SingIn = () => {
-
-  const location = useLocation()
-  const navigate = useNavigate()
-  const logInUser = useAuthState(auth)
+  const location = useLocation();
+  const navigate = useNavigate();
+  const logInUser = useAuthState(auth);
   let from = location.state?.from?.pathname || "/";
 
   const { register, handleSubmit, reset } = useForm();
 
-  const [ createUserWithEmailAndPassword, user, loading, createUserError, ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
-  
+  const [createUserWithEmailAndPassword, user, loading, createUserError] =
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
   // submit form function
   const onSubmit = (data) => {
-
     const { email, password, confirmPassword } = data;
 
     //check valid email or not
     if (email.match(regexEmail)) {
       //no work hear
     } else {
-      return toast.error("Please Input Valid Email")
+      return toast.error("Please Input Valid Email");
     }
 
     //check valid pass and confirm Pass
     if (password === confirmPassword) {
       if (confirmPassword.match(regexPassword)) {
-
         //create user with email and password
-        createUserWithEmailAndPassword(email, confirmPassword)
-        createUserError && toast.error(`${createUserError?.message.slice(22, -2)?.toUpperCase()}`)
-        reset()//reset form value
-        
+        createUserWithEmailAndPassword(email, confirmPassword);
+        createUserError &&
+          toast.error(
+            `${createUserError?.message.slice(22, -2)?.toUpperCase()}`
+          );
+        reset(); //reset form value
       } else {
-        return toast.error("Minimum eight characters, One letter & one number")
+        return toast.error("Minimum eight characters, One letter & one number");
       }
     } else {
-        return toast.error("Password Not Match")
+      return toast.error("Password Not Match");
     }
 
-    if(logInUser){
-      toast.success("Send Email Verification")
-      return navigate("/login")
+    if (logInUser) {
+      toast.success("Send Email Verification");
+      return navigate("/login");
     }
-
-
   };
 
   return (
-    <div >
+    <div>
       <div className="sectionContainer relative">
         <div className="backBtn flex justify-start text-slate-100 sm:absolute sm:top-6 sm:left-5 mt-4 ml-4 sm:mt-0 sm:ml-0 mb-5 sm:mb-0">
           <button
