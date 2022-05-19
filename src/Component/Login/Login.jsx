@@ -67,7 +67,7 @@ const Login = () => {
 
   if (logInUser?.emailVerified) {
     localStorage.removeItem("jwtSecretKey");
-    fetch("http://localhost:5000/verifiedToken", {
+    fetch("https://barishal-gadget-store.herokuapp.com/verifiedToken", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

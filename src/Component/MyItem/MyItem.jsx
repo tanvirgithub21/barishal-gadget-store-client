@@ -13,7 +13,7 @@ const MyItem = () => {
 
   const [myItem, setMyItem] = useState([]);
   const [logInUser] = useAuthState(auth);
-  const url = `http://localhost:5000/allItems?email=${logInUser?.email}`;
+  const url = `https://barishal-gadget-store.herokuapp.com/allItems?email=${logInUser?.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -38,7 +38,7 @@ const MyItem = () => {
   const deleteItem = (id) => {
     setConfirm(false);
 
-    const url = `http://localhost:5000/item/delete/${id}`;
+    const url = `https://barishal-gadget-store.herokuapp.com/item/delete/${id}`;
     fetch(url, {
       method: "delete",
     })

@@ -14,7 +14,7 @@ const Inventory = () => {
   const [inventoryItem, setInventoryItem] = useState([]);
   const [newDescription, setNewDescription] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/allItems")
+    fetch("https://barishal-gadget-store.herokuapp.com/allItems")
       .then((res) => res.json())
       .then((data) => {
         setInventoryItem(data)
