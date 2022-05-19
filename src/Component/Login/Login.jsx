@@ -54,6 +54,7 @@ const Login = () => {
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
   const handleSingInGoogle = () => {
+    localStorage.removeItem("jwtSecretKey");
     signInWithGoogle();
   };
 

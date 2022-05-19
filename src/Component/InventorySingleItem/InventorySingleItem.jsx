@@ -30,7 +30,7 @@ const InventorySingleItem = ({item}) => {
                 src={item?.imgUrl}
                 alt="Inventory Item"
               />
-              <div className="flex flex-col justify-between p-4 leading-normal text-white font-normal text-xl">
+              <div className="w-full flex flex-col justify-between p-4 leading-normal text-white font-normal text-xl">
                 <h5 title={item?.productName} className="mb-2 text-2xl font-[500] tracking-tight ">{newPdName}</h5>
                 <p title={item?.description} className="mb-3 text-gray-700 dark:text-gray-400">{newDescription}</p>
                 <p className="mb-4">Supplier: Daraz BD</p>
@@ -40,7 +40,7 @@ const InventorySingleItem = ({item}) => {
                   <p>$ {item?.price}</p>
                 </div>
 
-                  <Link to={`/inventory/${item?._id}`} className="bg-[#3369ff] py-1 rounded-md hover:bg-[#1e5aff] text-center transition duration-150 ease-in-out">Update</Link>
+                  <Link to={`/inventory/${item?._id}`} className="w-full bg-[#3369ff] py-1 rounded-md hover:bg-[#1e5aff] text-center transition duration-150 ease-in-out">Update</Link>
 
               </div>
             </div>

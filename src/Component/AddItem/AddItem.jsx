@@ -133,7 +133,7 @@ const AddItem = () => {
                 {...register("rating")}
                 type="number"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="5 or 4.5 or 4 or 3.5 or 3"
+                placeholder="Up to 5"
                 required
               />
             </div>
@@ -146,7 +146,7 @@ const AddItem = () => {
                 {...register("category")}
                 type="text"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="product Category"
+                placeholder="product Category New or Trending"
                 required
               />
             </div>
