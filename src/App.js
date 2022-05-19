@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
@@ -18,11 +18,16 @@ import MyItem from "./Component/MyItem/MyItem";
 import Blog from "./Component/Blog/Blog";
 
 function App() {
+
+  const navigate = useNavigate()
+
   return (
     <div className="App">
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={
+          navigate("/home")
+        } />
         <Route path="/home" element={<Home />} />
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/blog" element={<Blog />} />

@@ -5,11 +5,18 @@ import { AiOutlinePlusSquare } from "react-icons/ai";
 import Loading from "../Loading/Loading";
 
 const Inventory = () => {
+  // auto scroll top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
+  // auto scroll top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-    //loading tiger
-    const [loading, setLoading] = useState(true);
-    
+  //loading tiger
+  const [loading, setLoading] = useState(true);
 
   const [inventoryItem, setInventoryItem] = useState([]);
   const [newDescription, setNewDescription] = useState([]);
@@ -17,8 +24,8 @@ const Inventory = () => {
     fetch("https://barishal-gadget-store.herokuapp.com/allItems")
       .then((res) => res.json())
       .then((data) => {
-        setInventoryItem(data)
-        setLoading(false)
+        setInventoryItem(data);
+        setLoading(false);
       });
   }, []);
 

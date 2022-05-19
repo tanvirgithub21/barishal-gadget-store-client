@@ -5,21 +5,22 @@ import { Link, Navigate } from "react-router-dom";
 import { BiErrorAlt } from "react-icons/bi";
 import Loading from "../Loading/Loading";
 const ManageItem = () => {
-
+  // auto scroll top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   //loading tiger
   const [loading, setLoading] = useState(true);
-  
+
   const [manageItem, setManageItem] = useState([]);
   useEffect(() => {
     fetch("https://barishal-gadget-store.herokuapp.com/allItems")
       .then((res) => res.json())
       .then((data) => {
-        setManageItem(data)
-        setLoading(false)
+        setManageItem(data);
+        setLoading(false);
       });
   }, []);
-
-    
 
   const [confirm, setConfirm] = useState(false); //open confirm mass
   const [deleteConfirm, setDeleteConfirm] = useState(false);

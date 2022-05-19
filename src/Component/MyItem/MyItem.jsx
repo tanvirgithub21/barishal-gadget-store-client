@@ -6,10 +6,13 @@ import { BiErrorAlt } from "react-icons/bi";
 import Loading from "../Loading/Loading";
 
 const MyItem = () => {
+  // auto scroll top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-    //loading tiger
-    const [loading, setLoading] = useState(true);
-    
+  //loading tiger
+  const [loading, setLoading] = useState(true);
 
   const [myItem, setMyItem] = useState([]);
   const [logInUser] = useAuthState(auth);
@@ -18,8 +21,8 @@ const MyItem = () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setMyItem(data)
-        setLoading(false)
+        setMyItem(data);
+        setLoading(false);
       });
   }, [logInUser]);
 

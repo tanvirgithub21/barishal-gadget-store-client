@@ -5,6 +5,11 @@ import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const UpdateItem = () => {
+  // auto scroll top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { _id } = useParams();
 
   const [newDescription, setNewDescription] = useState("");

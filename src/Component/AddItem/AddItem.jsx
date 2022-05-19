@@ -7,6 +7,10 @@ import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const AddItem = () => {
+  // auto scroll top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [user] = useAuthState(auth);
 
   const [todayDate, settodayDate] = useState(new Date()); //this year month date

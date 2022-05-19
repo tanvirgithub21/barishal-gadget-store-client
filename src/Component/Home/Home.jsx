@@ -7,7 +7,11 @@ import { BsFacebook, BsInstagram, BsGithub } from "react-icons/bs";
 import "./Home.css";
 
 const Home = () => {
-  const homeBannerImage = "https://i.ibb.co/235B0nC/5317414.jpg";
+
+  // auto scroll top
+  useEffect(()=>{
+    window.scrollTo(0, 0)
+  },[])
 
   //loading tiger
   const [loading, setLoading] = useState(true);
