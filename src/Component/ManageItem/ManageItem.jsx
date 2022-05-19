@@ -5,22 +5,21 @@ import { Link, Navigate } from "react-router-dom";
 import { BiErrorAlt } from "react-icons/bi";
 import Loading from "../Loading/Loading";
 const ManageItem = () => {
-  // auto scroll top
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
   //loading tiger
   const [loading, setLoading] = useState(true);
-
+  
   const [manageItem, setManageItem] = useState([]);
   useEffect(() => {
-    fetch("https://barishal-gadget-store.herokuapp.com/allItems")
+    fetch("http://localhost:5000/allItems")
       .then((res) => res.json())
       .then((data) => {
-        setManageItem(data);
-        setLoading(false);
+        setManageItem(data)
+        setLoading(false)
       });
   }, []);
+
+    
 
   const [confirm, setConfirm] = useState(false); //open confirm mass
   const [deleteConfirm, setDeleteConfirm] = useState(false);
@@ -35,7 +34,7 @@ const ManageItem = () => {
   const deleteItem = (id) => {
     setConfirm(false);
 
-    const url = `https://barishal-gadget-store.herokuapp.com/item/delete/${id}`;
+    const url = `http://localhost:5000/item/delete/${id}`;
     fetch(url, {
       method: "delete",
     })

@@ -7,10 +7,6 @@ import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const AddItem = () => {
-  // auto scroll top
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   const [user] = useAuthState(auth);
 
   const [todayDate, settodayDate] = useState(new Date()); //this year month date
@@ -26,7 +22,7 @@ const AddItem = () => {
     data.email = user?.email;
 
     // Simple POST request with a JSON body using fetch
-    fetch("https://barishal-gadget-store.herokuapp.com/addItem", {
+    fetch("http://localhost:5000/addItem", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BlogQuestion from "../BlogQuestion/BlogQuestion";
 import Loading from "../Loading/Loading";
 
 const Blog = () => {
-
-      // auto scroll top
-      useEffect(()=>{
-        window.scrollTo(0, 0)
-      },[])
-
   //loading tiger
   const [loading, setLoading] = useState(true);
 

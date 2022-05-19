@@ -6,23 +6,20 @@ import { BiErrorAlt } from "react-icons/bi";
 import Loading from "../Loading/Loading";
 
 const MyItem = () => {
-  // auto scroll top
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
-  //loading tiger
-  const [loading, setLoading] = useState(true);
+    //loading tiger
+    const [loading, setLoading] = useState(true);
+    
 
   const [myItem, setMyItem] = useState([]);
   const [logInUser] = useAuthState(auth);
-  const url = `https://barishal-gadget-store.herokuapp.com/allItems?email=${logInUser?.email}`;
+  const url = `http://localhost:5000/allItems?email=${logInUser?.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setMyItem(data);
-        setLoading(false);
+        setMyItem(data)
+        setLoading(false)
       });
   }, [logInUser]);
 
@@ -41,7 +38,7 @@ const MyItem = () => {
   const deleteItem = (id) => {
     setConfirm(false);
 
-    const url = `https://barishal-gadget-store.herokuapp.com/item/delete/${id}`;
+    const url = `http://localhost:5000/item/delete/${id}`;
     fetch(url, {
       method: "delete",
     })

@@ -16,10 +16,6 @@ const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const Login = () => {
-  // auto scroll top
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   const location = useLocation();
   const navigate = useNavigate();
   const [logInUser] = useAuthState(auth);
@@ -71,7 +67,7 @@ const Login = () => {
 
   if (logInUser?.emailVerified) {
     localStorage.removeItem("jwtSecretKey");
-    fetch("https://barishal-gadget-store.herokuapp.com/verifiedToken", {
+    fetch("http://localhost:5000/verifiedToken", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

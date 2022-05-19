@@ -8,18 +8,13 @@ import "./Home.css";
 
 const Home = () => {
 
-  // auto scroll top
-  useEffect(()=>{
-    window.scrollTo(0, 0)
-  },[])
-
   //loading tiger
   const [loading, setLoading] = useState(true);
 
   //New Product data
   const [latestProducts, setLatestProduct] = useState([]);
   useEffect(() => {
-    fetch("https://barishal-gadget-store.herokuapp.com/allItems?category=New")
+    fetch("http://localhost:5000/allItems?category=New")
       .then((res) => res.json())
       .then((data) => setLatestProduct(data));
   }, []);
@@ -37,7 +32,7 @@ const Home = () => {
   const [trendingProducts, setTrendingProduct] = useState([]);
 
   useEffect(() => {
-    fetch("https://barishal-gadget-store.herokuapp.com/allItems?category=Trending")
+    fetch("http://localhost:5000/allItems?category=Trending")
       .then((res) => res.json())
       .then((data) => setTrendingProduct(data));
     // setLoading(false);
@@ -56,7 +51,7 @@ const Home = () => {
   const [inventoryItem, setInventoryItem] = useState([]);
 
   useEffect(() => {
-    fetch("https://barishal-gadget-store.herokuapp.com/allItems")
+    fetch("http://localhost:5000/allItems")
       .then((res) => res.json())
       .then((data) => {
         setInventoryItem(data);

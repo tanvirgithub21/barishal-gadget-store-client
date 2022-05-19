@@ -5,11 +5,6 @@ import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const UpdateItem = () => {
-  // auto scroll top
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const { _id } = useParams();
 
   const [newDescription, setNewDescription] = useState("");
@@ -20,7 +15,7 @@ const UpdateItem = () => {
   const [updateItem, setUpdateItem] = useState({});
 
   useEffect(() => {
-    fetch(`https://barishal-gadget-store.herokuapp.com/item/${_id}`)
+    fetch(`http://localhost:5000/item/${_id}`)
       .then((res) => res.json())
       .then((data) => setUpdateItem(data));
   }, [newQuantity]);
@@ -45,7 +40,7 @@ const UpdateItem = () => {
   }, [updateItem, newQuantity]);
 
   //update url
-  const itemUpdateUrl = `https://barishal-gadget-store.herokuapp.com/item/update/${_id}`;
+  const itemUpdateUrl = `http://localhost:5000/item/update/${_id}`;
 
   const handelDeliver = () => {
     if (newQuantity <= 0) {

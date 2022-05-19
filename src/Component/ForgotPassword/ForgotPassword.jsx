@@ -14,10 +14,6 @@ const imageUrl =
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 const ForgotPassword = () => {
-  // auto scroll top
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   //loading tiger
   const [loading, setLoading] = useState(false);
 
