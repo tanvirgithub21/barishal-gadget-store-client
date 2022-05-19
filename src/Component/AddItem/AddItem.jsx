@@ -26,6 +26,8 @@ const AddItem = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `${localStorage.getItem("jwtSecretKey")}`,
+        email: `${user?.email}`,
       },
       body: JSON.stringify(data),
     })
@@ -35,7 +37,6 @@ const AddItem = () => {
           ? toast.success("Add Item successful")
           : toast.error("Somethin Wrong")
       );
- 
 
     reset();
   };

@@ -9,7 +9,6 @@ import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import { async } from "@firebase/util";
 import Loading from "../Loading/Loading";
 
 //email and pass regex
@@ -20,11 +19,10 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [logInUser] = useAuthState(auth);
-  let form = location.state?.form?.pathname || "/"; 
+  let form = location.state?.form?.pathname || "/";
 
-    //loading tiger
-    const [loading, setLoading] = useState(false);
-    
+  //loading tiger
+  const [loading, setLoading] = useState(false);
 
   const [signInWithEmailAndPassword, user, signInLoading, signInError] =
     useSignInWithEmailAndPassword(auth);
@@ -47,7 +45,7 @@ const Login = () => {
     }
 
     //login With Email and Password
-    setLoading(true)
+    setLoading(true);
     signInWithEmailAndPassword(email, password);
     reset();
   };
@@ -60,12 +58,28 @@ const Login = () => {
   };
 
   useEffect(() => {
+    setLoading(false);
     toast.error(signInError?.message.slice(22, -2).toUpperCase());
   }, [signInError]);
 
+  console.log(logInUser);
+
   if (logInUser?.emailVerified) {
-    setLoading(false)
-    navigate(form, { replace: true });
+    localStorage.removeItem("jwtSecretKey");
+    fetch("http://localhost:5000/verifiedToken", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: logInUser?.email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("jwtSecretKey", data.token);
+        setLoading(false);
+        navigate(form, { replace: true });
+      });
   }
 
   return (
