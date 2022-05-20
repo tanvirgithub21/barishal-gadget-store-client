@@ -22,7 +22,7 @@ const AddItem = () => {
     data.email = user?.email;
 
     // Simple POST request with a JSON body using fetch
-    fetch("http://localhost:5000/addItem", {
+    fetch("https://barishal-gadget-store.herokuapp.com/addItem", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

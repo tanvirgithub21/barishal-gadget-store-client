@@ -14,7 +14,7 @@ const Home = () => {
   //New Product data
   const [latestProducts, setLatestProduct] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/allItems?category=New")
+    fetch("https://barishal-gadget-store.herokuapp.com/allItems?category=New")
       .then((res) => res.json())
       .then((data) => setLatestProduct(data));
   }, []);
@@ -32,7 +32,7 @@ const Home = () => {
   const [trendingProducts, setTrendingProduct] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allItems?category=Trending")
+    fetch("https://barishal-gadget-store.herokuapp.com/allItems?category=Trending")
       .then((res) => res.json())
       .then((data) => setTrendingProduct(data));
     // setLoading(false);
@@ -51,7 +51,7 @@ const Home = () => {
   const [inventoryItem, setInventoryItem] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allItems")
+    fetch("https://barishal-gadget-store.herokuapp.com/allItems")
       .then((res) => res.json())
       .then((data) => {
         setInventoryItem(data);

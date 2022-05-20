@@ -11,7 +11,7 @@ const ManageItem = () => {
   
   const [manageItem, setManageItem] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/allItems")
+    fetch("https://barishal-gadget-store.herokuapp.com/allItems")
       .then((res) => res.json())
       .then((data) => {
         setManageItem(data)
@@ -34,7 +34,7 @@ const ManageItem = () => {
   const deleteItem = (id) => {
     setConfirm(false);
 
-    const url = `http://localhost:5000/item/delete/${id}`;
+    const url = `https://barishal-gadget-store.herokuapp.com/item/delete/${id}`;
     fetch(url, {
       method: "delete",
     })

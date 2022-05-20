@@ -15,7 +15,7 @@ const UpdateItem = () => {
   const [updateItem, setUpdateItem] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/item/${_id}`)
+    fetch(`https://barishal-gadget-store.herokuapp.com/item/${_id}`)
       .then((res) => res.json())
       .then((data) => setUpdateItem(data));
   }, [newQuantity]);
@@ -40,7 +40,7 @@ const UpdateItem = () => {
   }, [updateItem, newQuantity]);
 
   //update url
-  const itemUpdateUrl = `http://localhost:5000/item/update/${_id}`;
+  const itemUpdateUrl = `https://barishal-gadget-store.herokuapp.com/item/update/${_id}`;
 
   const handelDeliver = () => {
     if (newQuantity <= 0) {
